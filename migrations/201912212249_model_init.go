@@ -1,6 +1,3 @@
-package template
-
-var createNewTableTemplate = `
 package migrations
 
 import (
@@ -11,7 +8,7 @@ import (
 func init() {
 	migrations = append(migrations, &gormigrate.Migration{
 
-		ID: "%s",
+		ID: "201912212249",
 		Migrate: func(tx *gorm.DB) error {
 			// it's a good pratice to copy the struct inside the function,
 			// so side effects are prevented if the original struct changes during the time
@@ -25,10 +22,4 @@ func init() {
 			return tx.DropTable("people").Error
 		},
 	})
-}
-`
-
-// CreateNewTable 创建一个新的 Model（table）
-func CreateNewTable(relativePath, hintName string) error {
-	return render(relativePath, hintName, createNewTableTemplate)
 }

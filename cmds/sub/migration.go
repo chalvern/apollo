@@ -14,9 +14,9 @@ var (
 	migrator migrations.Migrator
 )
 
-// CommandOfMigrate command of migrate
-func CommandOfMigrate(migratorArg migrations.Migrator) cli.Command {
-	migrator = migratorArg
+// commandOfMigrate command of migrate
+func commandOfMigrate(m migrations.Migrator) cli.Command {
+	migrator = m
 	return cli.Command{
 		Name:    "migrate",
 		Aliases: []string{"m"},
@@ -73,7 +73,7 @@ func migrate(c *cli.Context) error {
 	// initializer
 	initializer.InitMysql(context.Background())
 
-	migrator.Migrate()
+	migrator.Migrate(initializer.DB)
 
 	sugar.Info("migration done!")
 	return nil
@@ -91,7 +91,7 @@ func migrateTo(c *cli.Context) error {
 		return nil
 	}
 
-	migrator.MigrateTo(args[0])
+	migrator.MigrateTo(initializer.DB, args[0])
 
 	sugar.Infof("migration to %s done!", args[0])
 	return nil
@@ -103,7 +103,7 @@ func rollbackLast(c *cli.Context) error {
 	// initializer
 	initializer.InitMysql(context.Background())
 
-	migrator.RollbackLast()
+	migrator.RollbackLast(initializer.DB)
 
 	sugar.Info("RollbackLast done!")
 	return nil
@@ -121,7 +121,7 @@ func rollbackTo(c *cli.Context) error {
 		return nil
 	}
 
-	migrator.RollbackTo(args[0])
+	migrator.RollbackTo(initializer.DB, args[0])
 
 	sugar.Infof("RollbackTo to %s done!", args[0])
 	return nil

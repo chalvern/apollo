@@ -17,10 +17,10 @@ var (
 
 // Migrator migrator
 type Migrator interface {
-	Migrate()
-	MigrateTo(migrationID string)
-	RollbackLast()
-	RollbackTo(migrationID string)
+	Migrate(db *gorm.DB)
+	MigrateTo(db *gorm.DB, migrationID string)
+	RollbackLast(db *gorm.DB)
+	RollbackTo(db *gorm.DB, migrationID string)
 }
 
 type migrator struct{}
