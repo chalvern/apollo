@@ -1,0 +1,99 @@
+package cmds
+
+import (
+	"context"
+	"fmt"
+	"net/http"
+	"os"
+	"os/signal"
+	"sync"
+	"syscall"
+	"time"
+
+	"github.com/chalvern/apollo/configs/initializer"
+	"github.com/chalvern/sugar"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/spf13/viper"
+	"github.com/urfave/cli"
+)
+
+// AppInit init
+func AppInit() *cli.App {
+	app := cli.NewApp()
+
+	// 1. base application info
+	// 1. 基础的应用信息
+	app.Name = "apollo"
+	app.Author = "zhjw43"
+	app.Version = "0.0.1"
+	app.Copyright = "wheresmile group"
+	app.Usage = "backend of some projects"
+
+	// 2. flags
+	// 2. 可传入的标识
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  "config, c",
+			Value: "./configs/config.yml",
+			Usage: "load configuration from yaml `FILE`",
+		},
+	}
+
+	app.Before = func(c *cli.Context) error {
+		// viper must be config at first
+		// viper 必须第一个被配置，因为其他的配置项会依赖它
+		configFile := c.String("config")
+		sugar.Infof("init viper with config File: %s", configFile)
+		initializer.InitViperWithFile(configFile)
+		return nil
+	}
+
+	app.Action = mainJob
+	return app
+}
+
+func mainJob(c *cli.Context) error {
+	_, cancel := context.WithCancel(context.Background())
+
+	// 2. 同步启用几个线程
+	wg := sync.WaitGroup{}
+	wg.Add(1)
+
+	// the first thread of server
+	// 启动服务
+	go func() {
+		defer wg.Done()
+		fmt.Println("api 服务")
+	}()
+
+	// start monitor
+	// 启动 prometheus 监控系统
+	go func() {
+		addr := viper.GetString("core.monitor_addr")
+		http.Handle("/metrics", promhttp.Handler())
+		http.ListenAndServe(addr, nil)
+	}()
+
+	// 4. check system signal for graceful ending.
+	// 4 检测系统信号，促使优雅终止
+	go func() {
+		sg := make(chan os.Signal)
+		signal.Notify(sg, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL)
+		// stop server
+		select {
+		case s := <-sg:
+			// 结束上下文，通告其他组件结束进程
+			cancel()
+			sugar.Infof("got signal: %s", s.String())
+		}
+	}()
+
+	if viper.GetString("core.env") == "production" {
+		// wait for stopping clear
+		time.Sleep(time.Second * 10)
+	} else {
+		time.Sleep(time.Second * 3)
+	}
+	sugar.Info("app stoped successfully")
+	return nil
+}
