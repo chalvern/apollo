@@ -70,29 +70,28 @@ func mainJob(c *cli.Context) error {
 	// 启动 prometheus 监控系统
 	go func() {
 		addr := viper.GetString("core.monitor_addr")
+		sugar.Infof("monitor addr: %s", addr)
 		http.Handle("/metrics", promhttp.Handler())
 		http.ListenAndServe(addr, nil)
 	}()
 
 	// 4. check system signal for graceful ending.
 	// 4 检测系统信号，促使优雅终止
-	go func() {
-		sg := make(chan os.Signal)
-		signal.Notify(sg, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL)
-		// stop server
-		select {
-		case s := <-sg:
-			// 结束上下文，通告其他组件结束进程
-			cancel()
-			sugar.Infof("got signal: %s", s.String())
-		}
-	}()
+	sg := make(chan os.Signal)
+	signal.Notify(sg, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGKILL)
+	// stop server
+	select {
+	case s := <-sg:
+		// 结束上下文，通告其他组件结束进程
+		cancel()
+		sugar.Infof("got signal: %s", s.String())
+	}
 
 	if viper.GetString("core.env") == "production" {
 		// wait for stopping clear
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Second * 20)
 	} else {
-		time.Sleep(time.Second * 3)
+		time.Sleep(time.Second * 1)
 	}
 	sugar.Info("app stoped successfully")
 	return nil
