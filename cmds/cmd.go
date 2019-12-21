@@ -58,7 +58,8 @@ func AppInit() *cli.App {
 func mainJob(c *cli.Context) error {
 	ctx, cancel := context.WithCancel(context.Background())
 
-	// 2. 同步启用几个线程
+	// initializer
+	initializer.InitSugarWithPath("log/")
 
 	// the first thread of server
 	// 启动服务

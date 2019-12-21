@@ -9,5 +9,6 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0
 	github.com/spf13/viper v1.6.1
 	github.com/urfave/cli v1.22.2
+	go.uber.org/zap v1.10.0
 	gopkg.in/gormigrate.v1 v1.6.0
 )
