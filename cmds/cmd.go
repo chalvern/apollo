@@ -2,14 +2,13 @@ package cmds
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
-	"sync"
 	"syscall"
 	"time"
 
+	"github.com/chalvern/apollo/cmds/server"
 	"github.com/chalvern/apollo/cmds/sub"
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/sugar"
@@ -57,18 +56,16 @@ func AppInit() *cli.App {
 }
 
 func mainJob(c *cli.Context) error {
-	_, cancel := context.WithCancel(context.Background())
+	ctx, cancel := context.WithCancel(context.Background())
 
 	// 2. 同步启用几个线程
-	wg := sync.WaitGroup{}
-	wg.Add(1)
 
 	// the first thread of server
 	// 启动服务
-	go func() {
-		defer wg.Done()
-		fmt.Println("api 服务")
-	}()
+	for _, simpleThread := range server.Threads {
+		sugar.Infof("start simple thread %s", simpleThread.Name)
+		go simpleThread.Thread(ctx)
+	}
 
 	// start monitor
 	// 启动 prometheus 监控系统
