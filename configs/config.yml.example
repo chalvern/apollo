@@ -1,0 +1,16 @@
+core:
+  # develop/stage/production
+  env: develop
+
+# database config (mysql for example)
+database:
+  host: 127.0.0.1
+  port: 3306
+  dbname: apollo
+  username: root
+  password: 123456
+  args: charset=utf8mb4&parseTime=True&loc=Local
+  max_idle_conns: 20
+  max_open_conns: 15
+  row_format_dynamic: false  # for lower version mysql
+  log_mod: true
