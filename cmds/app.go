@@ -10,6 +10,7 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/chalvern/apollo/cmds/sub"
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/sugar"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -47,6 +48,9 @@ func AppInit() *cli.App {
 		initializer.InitViperWithFile(configFile)
 		return nil
 	}
+
+	// register sub commands
+	sub.Init(app)
 
 	app.Action = mainJob
 	return app
