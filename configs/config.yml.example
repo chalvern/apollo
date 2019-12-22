@@ -14,3 +14,7 @@ database:
   max_open_conns: 15
   row_format_dynamic: false  # for lower version mysql
   log_mod: true
+
+webserver:
+  addr: 0.0.0.0:2020
+  
