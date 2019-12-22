@@ -1,6 +1,7 @@
 package initializer
 
 import (
+	"github.com/chalvern/apollo/configs/constants"
 	jww "github.com/spf13/jwalterweatherman"
 	"github.com/spf13/viper"
 )
@@ -24,7 +25,7 @@ func InitViperWithFile(configFile string) {
 	}
 
 	// default value
-	viper.SetDefault("core.env", "production")
+	viper.SetDefault("core.env", constants.EnvProduction)
 	viper.SetDefault("core.monitor_addr", ":9999")
 
 	viperInitialized = true

@@ -10,6 +10,7 @@ import (
 
 	"github.com/chalvern/apollo/cmds/server"
 	"github.com/chalvern/apollo/cmds/sub"
+	"github.com/chalvern/apollo/configs/constants"
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/sugar"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -89,7 +90,7 @@ func mainJob(c *cli.Context) error {
 		sugar.Infof("got signal: %s", s.String())
 	}
 
-	if viper.GetString("core.env") == "production" {
+	if viper.GetString("core.env") == constants.EnvProduction {
 		// wait for stopping clear
 		time.Sleep(time.Second * 20)
 	} else {

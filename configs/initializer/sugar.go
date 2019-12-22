@@ -1,6 +1,7 @@
 package initializer
 
 import (
+	"github.com/chalvern/apollo/configs/constants"
 	"github.com/chalvern/sugar"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
@@ -12,7 +13,7 @@ func InitSugarWithPath(relativePath string) {
 	viperInitializedCheck()
 
 	var config zap.Config
-	if env := viper.GetString("core.env"); env == "develop" {
+	if env := viper.GetString("core.env"); env == constants.EnvDevelop {
 		config = zap.NewDevelopmentConfig()
 		// config.Encoding = "json"
 		config.OutputPaths = []string{"stderr", relativePath + "development.log"}
