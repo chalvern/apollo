@@ -4,6 +4,7 @@ import (
 	"github.com/chalvern/sugar"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 // InitSugarWithPath initializer Sugar with log's path
@@ -20,6 +21,7 @@ func InitSugarWithPath(relativePath string) {
 		config = zap.NewProductionConfig()
 		config.OutputPaths = []string{relativePath + env + ".log"}
 		config.ErrorOutputPaths = []string{relativePath + env + "_err.log"}
+		config.EncoderConfig.EncodeTime = zapcore.ISO8601TimeEncoder
 	}
 	sugar.SetSugar(&config)
 }
