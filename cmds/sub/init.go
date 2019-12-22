@@ -2,7 +2,12 @@ package sub
 
 import (
 	"github.com/chalvern/apollo/migrations"
+	"github.com/chalvern/sugar"
 	"github.com/urfave/cli"
+)
+
+var (
+	logger *sugar.Logger = sugar.NewLoggerOf("sub_cmd")
 )
 
 // Init initial all Sub CMDs

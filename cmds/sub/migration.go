@@ -6,7 +6,6 @@ import (
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/apollo/migrations"
 	"github.com/chalvern/apollo/migrations/template"
-	"github.com/chalvern/sugar"
 	"github.com/urfave/cli"
 )
 
@@ -61,68 +60,68 @@ func commandOfMigrate(m migrations.Migrator) cli.Command {
 func createMigration(c *cli.Context) error {
 	args := c.Args()
 	if len(args) != 1 {
-		sugar.Fatalf("must exactly one arg (hint_name of migration file) defined, args are now %v.", args)
+		logger.Fatalf("must exactly one arg (hint_name of migration file) defined, args are now %v.", args)
 	}
 	hintName := args[0]
 	return template.CreateNewTable(c.String("path"), hintName)
 }
 
 func migrate(c *cli.Context) error {
-	sugar.Infof("starting migration with config: %s", c.String("config"))
+	logger.Infof("starting migration with config: %s", c.String("config"))
 
 	// initializer
 	initializer.InitMysql(context.Background())
 
 	migrator.Migrate(initializer.DB)
 
-	sugar.Info("migration done!")
+	logger.Info("migration done!")
 	return nil
 }
 
 func migrateTo(c *cli.Context) error {
-	sugar.Info("starting migrateTo with config: %s", c.String("config"))
+	logger.Info("starting migrateTo with config: %s", c.String("config"))
 
 	// initializer
 	initializer.InitMysql(context.Background())
 
 	args := c.Args()
 	if len(args) != 1 {
-		sugar.Fatalf("one migrationID（timestamp）must be provided")
+		logger.Fatalf("one migrationID（timestamp）must be provided")
 		return nil
 	}
 
 	migrator.MigrateTo(initializer.DB, args[0])
 
-	sugar.Infof("migration to %s done!", args[0])
+	logger.Infof("migration to %s done!", args[0])
 	return nil
 }
 
 func rollbackLast(c *cli.Context) error {
-	sugar.Info("starting rollbackLast with config: %s", c.String("config"))
+	logger.Info("starting rollbackLast with config: %s", c.String("config"))
 
 	// initializer
 	initializer.InitMysql(context.Background())
 
 	migrator.RollbackLast(initializer.DB)
 
-	sugar.Info("RollbackLast done!")
+	logger.Info("RollbackLast done!")
 	return nil
 }
 
 func rollbackTo(c *cli.Context) error {
-	sugar.Info("starting rollbackTo with config: %s", c.String("config"))
+	logger.Info("starting rollbackTo with config: %s", c.String("config"))
 
 	// initializer
 	initializer.InitMysql(context.Background())
 
 	args := c.Args()
 	if len(args) != 1 {
-		sugar.Fatalf("one migrationID（timestamp）must be provided")
+		logger.Fatalf("one migrationID（timestamp）must be provided")
 		return nil
 	}
 
 	migrator.RollbackTo(initializer.DB, args[0])
 
-	sugar.Infof("RollbackTo to %s done!", args[0])
+	logger.Infof("RollbackTo to %s done!", args[0])
 	return nil
 }

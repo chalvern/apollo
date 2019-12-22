@@ -15,6 +15,7 @@ type SimpleThread struct {
 var (
 	// Threads would be running in separately goroutines
 	Threads []SimpleThread
+	logger  *sugar.Logger = sugar.NewLoggerOf("server")
 )
 
 func init() {
@@ -22,7 +23,7 @@ func init() {
 		SimpleThread{
 			Name: "hello_thread",
 			Thread: func(ctx context.Context) {
-				sugar.Info("hello Thread")
+				logger.Info("hello Thread")
 			}},
 	)
 }
