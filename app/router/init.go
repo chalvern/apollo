@@ -12,15 +12,16 @@ type Config struct {
 	Handlers     []gin.HandlerFunc
 }
 
-type routerCongigs []Config
+type routerConfigs []Config
 
 var (
-	rcs = make([]Config, 1, 20)
+	routerConfigSlice = make([]Config, 1, 20)
+	routerConfigMap   = make(map[string]Config)
 )
 
 // get method
 func get(name, absolutePath string, handlers ...gin.HandlerFunc) {
-	rcs = append(rcs, Config{
+	routerConfigSlice = append(routerConfigSlice, Config{
 		Name:         name,
 		Method:       "get",
 		AbsolutePath: absolutePath,
@@ -30,7 +31,7 @@ func get(name, absolutePath string, handlers ...gin.HandlerFunc) {
 
 // post method
 func post(name, absolutePath string, handlers ...gin.HandlerFunc) {
-	rcs = append(rcs, Config{
+	routerConfigSlice = append(routerConfigSlice, Config{
 		Name:         name,
 		Method:       "post",
 		AbsolutePath: absolutePath,
@@ -40,7 +41,7 @@ func post(name, absolutePath string, handlers ...gin.HandlerFunc) {
 
 // put method
 func put(name, absolutePath string, handlers ...gin.HandlerFunc) {
-	rcs = append(rcs, Config{
+	routerConfigSlice = append(routerConfigSlice, Config{
 		Name:         name,
 		Method:       "put",
 		AbsolutePath: absolutePath,
@@ -50,7 +51,11 @@ func put(name, absolutePath string, handlers ...gin.HandlerFunc) {
 
 // Init initialize engine
 func Init(r *gin.Engine) *gin.Engine {
-	for _, rc := range rcs {
+
+	router()
+
+	for _, rc := range routerConfigSlice {
+		routerConfigMap[rc.Name] = rc
 		switch m := rc.Method; m {
 		case "get":
 			r.GET(rc.AbsolutePath, rc.Handlers...)
