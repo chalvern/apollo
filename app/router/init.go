@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +16,7 @@ type Config struct {
 type routerConfigs []Config
 
 var (
-	routerConfigSlice = make([]Config, 1, 20)
+	routerConfigSlice = make([]Config, 0, 20)
 	routerConfigMap   = make(map[string]Config)
 )
 
@@ -52,7 +53,7 @@ func put(name, absolutePath string, handlers ...gin.HandlerFunc) {
 // Init initialize engine
 func Init(r *gin.Engine) *gin.Engine {
 
-	router()
+	routerInit()
 
 	for _, rc := range routerConfigSlice {
 		routerConfigMap[rc.Name] = rc
@@ -64,7 +65,7 @@ func Init(r *gin.Engine) *gin.Engine {
 		case "put":
 			r.PUT(rc.AbsolutePath, rc.Handlers...)
 		default:
-			panic("方法未注册")
+			sugar.Fatalf("方法未注册: %v", rc)
 		}
 	}
 	return r

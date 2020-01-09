@@ -12,6 +12,6 @@ func pong(c *gin.Context) {
 }
 
 // 定义 router
-func router() {
+func routerInit() {
 	get("ping_pong", "/ping", pong)
 }
