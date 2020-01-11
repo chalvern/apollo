@@ -13,14 +13,13 @@
   <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <body>
     <div class="wrapper">
-      <div class="header container">
+      <div class="header">
+      {{ template "layout/_header.tpl" . }}
       </div>
       <div class="body container">
-        <!-- Post list -->
-        <!-- <div class="content"> -->
         {{ if .LayoutContent }}{{ .LayoutContent }} {{ end }}
       </div>
-      <div class="footer container">
+      <div class="footer">
       </div>
     </div>
   </body>
