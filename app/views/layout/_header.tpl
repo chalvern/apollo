@@ -13,7 +13,7 @@
       <div id="navbar" class="navbar-collapse collapse header-navbar">
          <ul class="nav navbar-nav navbar-right">
            <li>
-            <a href="/about">关于</a>
+            <a href="{{link `about`}}">关于</a>
            </li>
            {{if .Account}}
              <li>
@@ -23,13 +23,13 @@
               </a>
               <span class="dropdown-arrow"></span>
               <ul class="dropdown-menu">
-                <li><a href="/user/setting">个人资料</a></li>
-                <li><a href="/signout">退出</a></li>
+                <li><a href="{{link `user_info`}}">个人资料</a></li>
+                <li><a href="{{link `signout`}}">退出</a></li>
               </ul>
              </li>
            {{ else }}
-             <li><a href="/signin">登录</a></li>
-             <li><a href="/signup">注册</a></li>
+             <li><a href="{{link `signin`}}">登录</a></li>
+             <li><a href="{{link `signup`}}">注册</a></li>
            {{ end }}
          </ul>
       </div>

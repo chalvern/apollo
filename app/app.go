@@ -40,21 +40,21 @@ func Run(ctx context.Context) {
 	r.Use(ginzap.Ginzap(sugar.GetZapLogger(), time.RFC3339, true))
 	r.Use(ginzap.RecoveryWithZap(sugar.GetZapLogger(), true))
 
-	// 2.2 load template
 	_, file, _, _ := runtime.Caller(0)
-	simplate.SetViewsPath(path.Join(path.Dir(file), "views"))
-	simplate.SetLayoutFile("layout/default.html")
-	// 2.2.1 添加模板函数
-	helper.AddFuncMap()
-	simplate.InitTemplate()
-	r.HTMLRender = simplate.GinRender
-
-	// 2.3 static source
+	// static source
 	r.Static("/static", path.Join(path.Dir(file), "..", "assets"))
 
 	// 3. config router
 	// 3. 配置路由
 	rR := router.Init(r)
+
+	// load template，在配置路由时会初始化一些模板函数，因此放 router 后面
+	simplate.SetViewsPath(path.Join(path.Dir(file), "views"))
+	simplate.SetLayoutFile("layout/default.html")
+	// 添加模板函数
+	helper.AddFuncMap()
+	simplate.InitTemplate()
+	r.HTMLRender = simplate.GinRender
 
 	// 4. run server
 	// 4. 启动 server

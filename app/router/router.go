@@ -16,4 +16,13 @@ func pong(c *gin.Context) {
 func routerInit() {
 	get("ping_pong", "/ping", pong)
 	get("home_page", "/", home.Index)
+	get("about", "/about", pong)
+
+	// account
+	get("signup", "/signup", pong)
+	get("signin", "/signin", pong)
+	get("signout", "/signout", pong)
+
+	// user
+	get("user_info", "/user/info", pong)
 }

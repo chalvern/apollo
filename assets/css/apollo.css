@@ -4,6 +4,7 @@ body {
   font-size: 16px;
 }
 
+/* header */
 .header {
   border-bottom: 1px solid #e4e4e4;
   background-color: #f8f9fa;
@@ -12,3 +13,19 @@ body {
 .navbar {
   margin-bottom: unset;
 }
+
+.navbar-toggle .icon-bar {
+  background: black;
+}
+
+/* brand */
+.navbar-brand {
+  font-size: 24px;
+}
+
+.navbar-brand:first-letter {
+  color: #ff6a14;
+  font-weight: 700;
+}
+
+/* body */
