@@ -20,7 +20,7 @@ func routerInit() {
 
 	// account
 	get("signup", "/signup", pong)
-	get("signin", "/signin", pong)
+	get("signin", "/signin", controllers.SigninGet)
 	get("signout", "/signout", pong)
 
 	// user
