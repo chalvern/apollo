@@ -3,7 +3,7 @@ package router
 import (
 	"net/http"
 
-	"github.com/chalvern/apollo/app/controllers/home"
+	"github.com/chalvern/apollo/app/controllers"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +15,7 @@ func pong(c *gin.Context) {
 // 定义 router
 func routerInit() {
 	get("ping_pong", "/ping", pong)
-	get("home_page", "/", home.Index)
+	get("home_page", "/", controllers.HomeIndex)
 	get("about", "/about", pong)
 
 	// account

@@ -1,4 +1,4 @@
-package home
+package controllers
 
 import (
 	"net/http"
@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Index Home 首页
-func Index(c *gin.Context) {
+// HomeIndex Home 首页
+func HomeIndex(c *gin.Context) {
 	pageTitle := "荐周边（正见生活、品鉴生活，推荐生活）"
 	tabString := c.Query("t")
 	if tabString == "" {
