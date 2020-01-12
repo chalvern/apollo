@@ -24,6 +24,9 @@
     </div>
   </div>
   <div class="col-md-3">
+    <div class="body-sidebar hidden-xs hidden-sm">
+      {{template "components/_sidebar-about.tpl" . }}
+    </div>
   </div>
 </div>
 
