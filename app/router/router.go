@@ -19,7 +19,7 @@ func routerInit() {
 	get("about", "/about", pong)
 
 	// account
-	get("signup", "/signup", pong)
+	get("signup", "/signup", controllers.SignupGet)
 	get("signin", "/signin", controllers.SigninGet)
 	get("signout", "/signout", pong)
 

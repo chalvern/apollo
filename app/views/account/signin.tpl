@@ -18,7 +18,7 @@
           <div class="form-group">
             {{template "captcha/captcha.tpl"}}
           </div>
-          <input type="submit" class="btn btn-default" onclick="signin();return false;" value="登录"> <a href="/signup">去注册</a>
+          <input type="submit" class="btn btn-default" onclick="signin();return false;" value="登录"> <a href="{{link `signup`}}">去注册</a>
         </form>
       </div>
     </div>

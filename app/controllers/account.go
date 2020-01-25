@@ -12,3 +12,10 @@ func SigninGet(c *gin.Context) {
 		"PageTitle": "登录",
 	})
 }
+
+// SignupGet 获取注册页面
+func SignupGet(c *gin.Context) {
+	c.HTML(http.StatusOK, "account/signup.tpl", gin.H{
+		"PageTitle": "注册",
+	})
+}
