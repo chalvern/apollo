@@ -10,6 +10,7 @@ import (
 	"github.com/chalvern/apollo/app/helper"
 	"github.com/chalvern/apollo/app/router"
 	"github.com/chalvern/apollo/configs/constants"
+	"github.com/chalvern/apollo/tools/validator"
 	"github.com/chalvern/simplate"
 	"github.com/chalvern/sugar"
 	ginzap "github.com/gin-contrib/zap"
@@ -46,6 +47,10 @@ func Run(ctx context.Context) {
 
 	// 3. config router
 	// 3. 配置路由
+	// 3.1 配置校验器
+	validator.InitValidatorEnhancement()
+
+	// 3.2 配置路由
 	rR := router.Init(r)
 
 	// load template，在配置路由时会初始化一些模板函数，因此放 router 后面

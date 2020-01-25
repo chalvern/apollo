@@ -24,6 +24,7 @@ func routerInit() {
 
 	// account
 	get("signup", "/signup", controllers.SignupGet)
+	post("signup_post", "/signup", controllers.SigninPost)
 	get("signin", "/signin", controllers.SigninGet)
 	get("signout", "/signout", pong)
 
