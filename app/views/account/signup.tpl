@@ -6,7 +6,7 @@
         <div id="fflash">ji</div>
       </div>
       <div class="panel-body">
-        <form action="/signup" id="signup-form" method="post">
+        <form action="{{link `signup`}}" id="signup-form" method="post">
           <div class="form-group">
             <em style="color: red;">* </em><label for="email">邮箱</label>
             <input type="text" id="email" onchange="checkEmail(this.value)" name="email" class="form-control" placeholder="邮箱"></input>
