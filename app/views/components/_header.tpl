@@ -8,7 +8,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="/">见周边</a>
+        <a class="navbar-brand" href="/">{{ brand_title }}</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse header-navbar">
          <ul class="nav navbar-nav navbar-right">

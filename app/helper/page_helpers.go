@@ -9,6 +9,15 @@ func PageTitleHelper(title string) string {
 	return title + "-" + pageTitle
 }
 
+// BrandTitleHelper 返回 logo 描述
+func BrandTitleHelper() string {
+	brandTitle := viper.GetString(constants.BrandTitle)
+	if brandTitle == "" {
+		return "applo"
+	}
+	return brandTitle
+}
+
 // FirstCharacterOfHelper 获取字符串的第一个字符
 func FirstCharacterOfHelper(name string) string {
 	if len(name) == 0 {

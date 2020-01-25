@@ -9,4 +9,5 @@ const (
 const (
 	WebServerAddr string = "webserver.addr"
 	PageTitle     string = "webserver.page_title"
+	BrandTitle    string = "webserver.brand_title"
 )

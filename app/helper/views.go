@@ -10,5 +10,7 @@ func AddFuncMap() {
 	// 全局
 	simplate.AddFuncMap("dataFormat", DataFormatHelper)
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
+	simplate.AddFuncMap("brand_title", BrandTitleHelper)
 	simplate.AddFuncMap("firstChar", FirstCharacterOfHelper)
+
 }
