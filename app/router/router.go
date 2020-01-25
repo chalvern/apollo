@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/chalvern/apollo/app/controllers"
+	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,9 @@ func routerInit() {
 	get("ping_pong", "/ping", pong)
 	get("home_page", "/", controllers.HomeIndex)
 	get("about", "/about", pong)
+
+	// captcha
+	get("captcha_get", initializer.Captcha.URLPrefix+":id", controllers.GetCaptcha)
 
 	// account
 	get("signup", "/signup", controllers.SignupGet)

@@ -19,6 +19,9 @@
             <em style="color: red;">* </em><label for="password2">确认密码</label>
             <input type="password" id="password2" onchange="checkPassword2(this.value)" name="password2" class="form-control" placeholder="确认密码"></input>
           </div>
+          <div class="form-group">
+            {{template "captcha/captcha.tpl"}}
+          </div>
           <input type="submit" class="btn btn-default" onclick="signup();return false;" value="注册"></input> <a href="{{link `signin`}}">去登录</a>
         </form>
       </div>

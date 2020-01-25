@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/simplate"
 )
 
@@ -11,6 +12,8 @@ func AddFuncMap() {
 	simplate.AddFuncMap("dataFormat", DataFormatHelper)
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
+
+	simplate.AddFuncMap("create_captcha", initializer.Captcha.CreateCaptchaHTML)
 	simplate.AddFuncMap("firstChar", FirstCharacterOfHelper)
 
 }

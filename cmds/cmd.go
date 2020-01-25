@@ -61,6 +61,7 @@ func mainJob(c *cli.Context) error {
 
 	// initializer
 	initializer.InitSugarWithPath("log/")
+	initializer.InitCaptcha(ctx)
 
 	// the first thread of server
 	// 启动服务
