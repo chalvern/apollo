@@ -61,6 +61,7 @@ func mainJob(c *cli.Context) error {
 
 	// initializer
 	initializer.InitSugarWithPath("log/")
+	initializer.InitMysql(ctx)
 	initializer.InitCaptcha(ctx)
 
 	// the first thread of server

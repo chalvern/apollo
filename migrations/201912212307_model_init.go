@@ -26,6 +26,7 @@ func init() {
 
 				ResetPasswordKey string     `gorm:"type:varchar(128)" json:"-"` // 重置密码所需要的key
 				BannedTime       *time.Time `gorm:""`                           // 被拉黑到什么时候
+				Priority         int        `gorm:"default:0" json:"priority"`  // 权限优先级
 			}
 			return tx.AutoMigrate(&User{}).Error
 		},

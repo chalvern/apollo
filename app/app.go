@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/chalvern/apollo/app/helper"
+	"github.com/chalvern/apollo/app/model"
 	"github.com/chalvern/apollo/app/router"
 	"github.com/chalvern/apollo/configs/constants"
 	"github.com/chalvern/apollo/tools/validator"
@@ -30,6 +31,9 @@ func Run(ctx context.Context) {
 	if env != constants.EnvDevelop {
 		gin.SetMode(gin.ReleaseMode)
 	}
+
+	// 1.1 初始化 model
+	model.Init()
 
 	// 2. initial gin
 	// 2. 初始化 gin

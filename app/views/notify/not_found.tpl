@@ -8,7 +8,7 @@
     var t = 15;
     {{ end }}
     function showTime() {
-        $("#not-found-common").html("页面不存在😭😭😭，" + t + " 秒后自动跳转到首页");
+        $("#not-found-common").html("页面不存在😭😭😭，" + t + " 秒后自动跳转到 <a href='/'>首页</a>");
         t -= 1;
         if (t == 0) {
             window.location.href = '/';

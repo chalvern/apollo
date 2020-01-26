@@ -10,9 +10,9 @@
     {{ end }}
     function showTime() {
         {{ if .RedirectName }}
-            $("#success-common").html("{{.Info}}，" + t + " 秒后自动跳转到 {{.RedirectName}}。");
+            $("#success-common").html("{{.Info}}，" + t + " 秒后自动跳转到 <a href='{{.RedirectURL}}'>{{.RedirectName}}</a>。");
         {{ else }}
-            $("#success-common").html("{{.Info}}，" + t + " 秒后自动跳转到 首页。");
+            $("#success-common").html("{{.Info}}，" + t + " 秒后自动跳转到 <a href='/'>首页</a>。");
         {{ end }}
         t -= 1;
         if (t == 0) {

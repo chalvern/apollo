@@ -3,6 +3,8 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/chalvern/apollo/app/service"
+	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
 )
@@ -38,6 +40,23 @@ func SigninPost(c *gin.Context) {
 		c.HTML(http.StatusOK, "account/signup.tpl", gin.H{
 			"PageTitle": pageTitle,
 			FlashError:  "请检查邮箱、密码、验证码内容及格式是否填写正确",
+		})
+		return
+	}
+
+	// 验证码校验
+	if !initializer.Captcha.Verify(form.CaptchaID, form.Captcha) {
+		c.HTML(http.StatusBadRequest, "account/signup.tpl", gin.H{
+			"PageTitle": pageTitle,
+			FlashError:  "验证码错误",
+		})
+		return
+	}
+
+	if err := service.UserSignup(form.Email, form.Password); err != nil {
+		c.HTML(http.StatusBadRequest, "account/signup.tpl", gin.H{
+			"PageTitle": pageTitle,
+			FlashError:  "创建用户失败，邮箱已注册",
 		})
 		return
 	}
