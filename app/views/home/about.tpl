@@ -10,17 +10,7 @@
 
   <br />
   <p>一起来探索吧 : ) </p>
-
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
   
-
 </div>
+
+<div class="placeholder-body"></div>

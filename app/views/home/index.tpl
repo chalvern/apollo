@@ -29,7 +29,10 @@
 <div class="col-md-3">
   {{template "home/_sidebar.tpl" . }}
 </div>
+
 </div>
+
+<div class="placeholder-body"></div>
 
 <script type="text/javascript">
   $(function () {

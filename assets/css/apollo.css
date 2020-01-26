@@ -40,6 +40,10 @@ body {
   margin-top: 10px;
 }
 
+.placeholder-body {
+  margin: 200px 0;
+}
+
 /* body-sidebar */
 .body-sidebar {
   /* border: 1px solid #e4e4e4; */

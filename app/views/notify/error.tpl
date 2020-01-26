@@ -1,6 +1,7 @@
 
 <div id="error-common" style="text-align:center">
 </div>
+<div class="placeholder-body"></div>
 
 <script type="text/javascript">
     {{ if .Timeout}}
