@@ -41,4 +41,12 @@ func SigninPost(c *gin.Context) {
 		})
 		return
 	}
+
+	htmlOfOk(c, "notify/success.tpl", pageTitle, gin.H{
+		"Info":         "注册成功 😆😆😆",
+		"Timeout":      5,
+		"RedirectURL":  "/signin",
+		"RedirectName": "登陆页",
+	})
+
 }

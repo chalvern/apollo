@@ -14,9 +14,10 @@
   <body>
     <div class="wrapper">
       <div class="header">
-      {{ template "components/_header.tpl" . }}
+        {{ template "components/_header.tpl" . }}
       </div>
       <div class="body container">
+        {{template "components/_flash.tpl" .}}
         {{ if .LayoutContent }}{{ .LayoutContent }} {{ end }}
       </div>
       <div class="footer">
