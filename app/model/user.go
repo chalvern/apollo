@@ -5,6 +5,16 @@ import (
 	"time"
 )
 
+// 用户身份
+const (
+	UserPriorityUnValid = 0      // 未经任何认证
+	UserPriorityCommon  = 2 ^ 0  // 普通用户
+	UserPriorityAdmin   = 2 ^ 10 // 管理员
+	UserPrioritySuper   = 2 ^ 11 // 超级管理员
+
+	UserPriorityManager = UserPriorityAdmin | UserPrioritySuper
+)
+
 // User 存放用户信息
 type User struct {
 	Model
@@ -18,7 +28,7 @@ type User struct {
 	BannedTime       *time.Time `gorm:""`                           // 被拉黑到什么时候
 
 	// Priority 用户优先级，暂时使用这个字段给用户赋权
-	// 比如 普通用户给 2^1，admin 给 2^10
+	// 比如 普通用户给 2^0，admin 给 2^10
 	Priority int `gorm:"default:0" json:"priority"` // 权限优先级
 }
 

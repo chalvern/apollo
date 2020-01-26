@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/chalvern/apollo/app/controllers"
-	"github.com/chalvern/apollo/app/interceptors"
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/gin-gonic/gin"
 )
@@ -31,5 +30,11 @@ func routerInit() {
 	get("signout", "/signout", controllers.SignOut)
 
 	// user
-	get("user_info", "/user/info", interceptors.JwtMiddleware(), pong)
+	get("user_info", "/user/info", pong)
+
+	// url_title
+	get("url_title", "/url/title", controllers.QueryTitleFromURL)
+	// share
+	get("share_new_get", "/share/new", controllers.ShareNewGet)
+	post("share_new_post", "/share/new", controllers.ShareNewPost)
 }
