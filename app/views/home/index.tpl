@@ -1,6 +1,6 @@
 {{if .Account}}
 <div class="hidden-md hidden-lg">
-    <a href="/share" class="btn btn-default btn-block jzb-new-share">
+    <a href="/share" class="btn btn-default btn-block apollo-new-share">
         创建新分享
     </a>
 </div>
@@ -27,6 +27,7 @@
 	</div>
 </div>
 <div class="col-md-3">
+  {{template "home/_sidebar.tpl" . }}
 </div>
 </div>
 

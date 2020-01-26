@@ -2,7 +2,7 @@
   <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-heading">登录</div>
-      <div class="alert alert-danger alert-dismissible jzb-alert hide" role="alert">
+      <div class="alert alert-danger alert-dismissible apollo-alert hide" role="alert">
         <div id="fflash"></div>
       </div>
       <div class="panel-body">
@@ -37,10 +37,10 @@ function signin() {
   var captcha = $("#captcha").val();
   if (!email || !password || !captcha) {
     $("#fflash").html("请按照要求填写所有字段内容");
-    $(".jzb-alert").removeClass('hide');
+    $(".apollo-alert").removeClass('hide');
     return false;
   }
-  $(".jzb-alert").addClass('hide');
+  $(".apollo-alert").addClass('hide');
   $("#signin-form").submit();
   return true;
 }

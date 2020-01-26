@@ -48,7 +48,7 @@ func InitMysql(ctx context.Context) {
 // InitTestMysql 初始化测试数据库
 func InitTestMysql() {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?%s",
-		"root", "123456", "127.0.0.1", "3306", "jzb", "charset=utf8mb4&parseTime=True&loc=Local",
+		"root", "123456", "127.0.0.1", "3306", "apollo", "charset=utf8mb4&parseTime=True&loc=Local",
 	)
 	db, err := gorm.Open("mysql", dsn)
 	if err != nil {

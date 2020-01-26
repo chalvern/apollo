@@ -9,6 +9,12 @@ func PageTitleHelper(title string) string {
 	return title + "-" + pageTitle
 }
 
+// PageSideAboutHelper 边框中的介绍
+func PageSideAboutHelper() string {
+	aboutContent := viper.GetString(constants.AboutContent)
+	return aboutContent
+}
+
 // BrandTitleHelper 返回 logo 描述
 func BrandTitleHelper() string {
 	brandTitle := viper.GetString(constants.BrandTitle)

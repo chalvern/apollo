@@ -12,6 +12,7 @@ func AddFuncMap() {
 	simplate.AddFuncMap("dataFormat", DataFormatHelper)
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
+	simplate.AddFuncMap("about_content", PageSideAboutHelper)
 
 	simplate.AddFuncMap("create_captcha", initializer.Captcha.CreateCaptchaHTML)
 	simplate.AddFuncMap("firstChar", FirstCharacterOfHelper)

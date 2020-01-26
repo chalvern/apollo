@@ -2,7 +2,7 @@
   <div class="col-md-9">
     <div class="panel panel-default">
       <div class="panel-heading">注册</div>
-      <div class="alert alert-danger alert-dismissible jzb-alert hide" role="alert">
+      <div class="alert alert-danger alert-dismissible apollo-alert hide" role="alert">
         <div id="fflash">ji</div>
       </div>
       <div class="panel-body">
@@ -41,20 +41,20 @@ function checkEmail(email) {
   var reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
   if (email.length<4 || !reg.test(email)) {
     $("#fflash").html("请输入正确的邮箱地址");
-    $(".jzb-alert").removeClass('hide');
+    $(".apollo-alert").removeClass('hide');
     return;
   } else {
-    $(".jzb-alert").addClass('hide');
+    $(".apollo-alert").addClass('hide');
   }
 }
 
 function checkPassword(password) {
   if (password.length < 8) {
     $("#fflash").html("密码至少 8 位");
-    $(".jzb-alert").removeClass('hide');
+    $(".apollo-alert").removeClass('hide');
     return false;
   }
-  $(".jzb-alert").addClass('hide');
+  $(".apollo-alert").addClass('hide');
   return true;
 }
 
@@ -63,10 +63,10 @@ function checkPassword2(password2) {
   var password = $("#password").val();
   if (password !== password2) {
     $("#fflash").html("两次输入的密码不一致");
-    $(".jzb-alert").removeClass('hide');
+    $(".apollo-alert").removeClass('hide');
     return false;
   }
-  $(".jzb-alert").addClass('hide');
+  $(".apollo-alert").addClass('hide');
   return true;
 }
 
@@ -81,10 +81,10 @@ function signup() {
 
   if (!email || !password || !password2 || !captcha) {
     $("#fflash").html("请按照要求填写所有字段内容");
-    $(".jzb-alert").removeClass('hide');
+    $(".apollo-alert").removeClass('hide');
     return false;
   }
-  $(".jzb-alert").addClass('hide');
+  $(".apollo-alert").addClass('hide');
   $("#signup-form").submit();
   return true;
 }

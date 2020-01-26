@@ -5,6 +5,13 @@ core:
 jwt:
   hmac_secret: 123456
 
+cookie:
+  tag: "_t"
+  domain: "*"
+  secure: false
+  http_only: false
+  expr_hour: 240
+
 # database config (mysql for example)
 database:
   host: 127.0.0.1
@@ -20,4 +27,7 @@ database:
 
 webserver:
   addr: 0.0.0.0:2020
+  brand_title: 见周边
+  page_title: 探·见周边
+  about_content: 看见生活、品鉴生活、推荐生活。
   
