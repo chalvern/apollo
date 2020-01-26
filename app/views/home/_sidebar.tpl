@@ -1,4 +1,4 @@
-{{if .Account}}
+{{if account_normal .Account}}
 <div class="">
     <a href="/share" class="btn btn-default btn-block apollo-new-share">
         创建新分享
