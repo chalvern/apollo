@@ -25,7 +25,8 @@ type User struct {
 // FindByEmail 根据 Email 检索用户
 func (u *User) FindByEmail(email string) (User, error) {
 	user := User{}
-	err := mydb.Model(u).First(&user).Error
+	err := mydb.Model(u).Where("email=?", email).
+		First(&user).Error
 	return user, err
 }
 

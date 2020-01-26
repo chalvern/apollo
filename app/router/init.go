@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/chalvern/apollo/app/interceptors"
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
 )
@@ -22,31 +23,40 @@ var (
 
 // get method
 func get(name, absolutePath string, handlers ...gin.HandlerFunc) {
+	h := []gin.HandlerFunc{interceptors.JwtMiddleware()}
+	h = append(h, handlers...)
+	h = append(h, interceptors.AfterRouterMiddleware())
 	routerConfigSlice = append(routerConfigSlice, Config{
 		Name:         name,
 		Method:       "get",
 		AbsolutePath: absolutePath,
-		Handlers:     handlers,
+		Handlers:     h,
 	})
 }
 
 // post method
 func post(name, absolutePath string, handlers ...gin.HandlerFunc) {
+	h := []gin.HandlerFunc{interceptors.JwtMiddleware()}
+	h = append(h, handlers...)
+	h = append(h, interceptors.AfterRouterMiddleware())
 	routerConfigSlice = append(routerConfigSlice, Config{
 		Name:         name,
 		Method:       "post",
 		AbsolutePath: absolutePath,
-		Handlers:     handlers,
+		Handlers:     h,
 	})
 }
 
 // put method
 func put(name, absolutePath string, handlers ...gin.HandlerFunc) {
+	h := []gin.HandlerFunc{interceptors.JwtMiddleware()}
+	h = append(h, handlers...)
+	h = append(h, interceptors.AfterRouterMiddleware())
 	routerConfigSlice = append(routerConfigSlice, Config{
 		Name:         name,
 		Method:       "put",
 		AbsolutePath: absolutePath,
-		Handlers:     handlers,
+		Handlers:     h,
 	})
 }
 

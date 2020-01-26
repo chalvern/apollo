@@ -12,14 +12,13 @@ import (
 
 // SigninGet 获取登录页面
 func SigninGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "account/signin.tpl", gin.H{
-		"PageTitle": "登录",
-	})
+	c.Set(PageTitle, "登陆")
+	htmlOfOk(c, "account/signin.tpl", gin.H{})
 }
 
 // SignInPost 登陆
 func SignInPost(c *gin.Context) {
-	pageTitle := "登陆"
+	c.Set(PageTitle, "登陆")
 	form := struct {
 		Email     string `form:"email" binding:"required,email,lenlte=50"`
 		Password  string `form:"password" binding:"required,lengte=8"`
@@ -29,25 +28,32 @@ func SignInPost(c *gin.Context) {
 
 	if errs := c.ShouldBind(&form); errs != nil {
 		sugar.Warnf("SigninPost Bind form Error: %s", errs.Error())
-		c.HTML(http.StatusOK, "account/signin.tpl", gin.H{
-			"PageTitle": pageTitle,
-			FlashError:  "请检查邮箱、密码、验证码内容及格式是否填写正确",
+		html(c, http.StatusOK, "account/signin.tpl", gin.H{
+			FlashError: "请检查邮箱、密码、验证码内容及格式是否填写正确",
 		})
 		return
 	}
 
 	// 验证码校验
 	if !initializer.Captcha.Verify(form.CaptchaID, form.Captcha) {
-		c.HTML(http.StatusBadRequest, "account/signin.tpl", gin.H{
-			"PageTitle": pageTitle,
-			FlashError:  "验证码错误",
+		html(c, http.StatusBadRequest, "account/signin.tpl", gin.H{
+			FlashError: "验证码错误",
+		})
+		return
+	}
+
+	u, err := service.UserSigninByEmail(form.Email, form.Password)
+	if err != nil {
+		sugar.Warnf("邮箱 %s 登录失败，密码错误。 err: %v", form.Email, err)
+		html(c, http.StatusBadRequest, "account/signin.tpl", gin.H{
+			FlashError: "邮箱未注册或密码错误",
 		})
 		return
 	}
 
 	// 设置 cookie
 	token, err := jwt.NewToken(map[string]interface{}{
-		"uid": "zhjw43@163.com",
+		"email": u.Email,
 	})
 	if err != nil {
 		sugar.Errorf("SigninPost-NewToken-err: %s", err.Error())
@@ -55,7 +61,7 @@ func SignInPost(c *gin.Context) {
 	}
 	setJustCookie(c, token)
 
-	htmlOfOk(c, "notify/success.tpl", pageTitle, gin.H{
+	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "登陆成功 😆😆😆",
 		"Timeout":      5,
 		"RedirectURL":  "/",
@@ -65,7 +71,7 @@ func SignInPost(c *gin.Context) {
 
 // SignupGet 获取注册页面
 func SignupGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "account/signup.tpl", gin.H{
+	html(c, http.StatusOK, "account/signup.tpl", gin.H{
 		"PageTitle": "注册",
 	})
 }
@@ -84,7 +90,7 @@ func SignUpPost(c *gin.Context) {
 	if errs := c.ShouldBind(&form); errs != nil {
 		sugar.Warnf("SigninPost Bind form Error: %s", errs.Error())
 		// errors := errs.(validator.ValidationErrors)
-		c.HTML(http.StatusOK, "account/signup.tpl", gin.H{
+		html(c, http.StatusOK, "account/signup.tpl", gin.H{
 			"PageTitle": pageTitle,
 			FlashError:  "请检查邮箱、密码、验证码内容及格式是否填写正确",
 		})
@@ -93,7 +99,7 @@ func SignUpPost(c *gin.Context) {
 
 	// 验证码校验
 	if !initializer.Captcha.Verify(form.CaptchaID, form.Captcha) {
-		c.HTML(http.StatusBadRequest, "account/signup.tpl", gin.H{
+		html(c, http.StatusBadRequest, "account/signup.tpl", gin.H{
 			"PageTitle": pageTitle,
 			FlashError:  "验证码错误",
 		})
@@ -101,14 +107,14 @@ func SignUpPost(c *gin.Context) {
 	}
 
 	if err := service.UserSignup(form.Email, form.Password); err != nil {
-		c.HTML(http.StatusBadRequest, "account/signup.tpl", gin.H{
+		html(c, http.StatusBadRequest, "account/signup.tpl", gin.H{
 			"PageTitle": pageTitle,
 			FlashError:  "创建用户失败，邮箱已注册",
 		})
 		return
 	}
 
-	htmlOfOk(c, "notify/success.tpl", pageTitle, gin.H{
+	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "注册成功 😆😆😆",
 		"Timeout":      5,
 		"RedirectURL":  "/signin",
