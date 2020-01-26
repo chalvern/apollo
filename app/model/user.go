@@ -16,6 +16,7 @@ type User struct {
 
 	ResetPasswordKey string     `gorm:"type:varchar(128)" json:"-"` // 重置密码所需要的key
 	BannedTime       *time.Time `gorm:""`                           // 被拉黑到什么时候
+
 	// Priority 用户优先级，暂时使用这个字段给用户赋权
 	// 比如 普通用户给 2^1，admin 给 2^10
 	Priority int `gorm:"default:0" json:"priority"` // 权限优先级

@@ -7,6 +7,7 @@ import (
 	"runtime"
 	"time"
 
+	"github.com/chalvern/apollo/app/controllers"
 	"github.com/chalvern/apollo/app/helper"
 	"github.com/chalvern/apollo/app/model"
 	"github.com/chalvern/apollo/app/router"
@@ -32,8 +33,9 @@ func Run(ctx context.Context) {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
-	// 1.1 初始化 model
+	// 1.1 初始化 model/controller 等
 	model.Init()
+	controllers.Init()
 
 	// 2. initial gin
 	// 2. 初始化 gin

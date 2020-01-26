@@ -2,6 +2,9 @@ core:
   # develop/stage/production
   env: develop
 
+jwt:
+  hmac_secret: 123456
+
 # database config (mysql for example)
 database:
   host: 127.0.0.1
