@@ -63,7 +63,7 @@ func SignInPost(c *gin.Context) {
 
 	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "登陆成功 😆😆😆",
-		"Timeout":      5,
+		"Timeout":      3,
 		"RedirectURL":  "/",
 		"RedirectName": "主页",
 	})
@@ -116,7 +116,7 @@ func SignUpPost(c *gin.Context) {
 
 	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "注册成功 😆😆😆",
-		"Timeout":      5,
+		"Timeout":      3,
 		"RedirectURL":  "/signin",
 		"RedirectName": "登陆页",
 	})
@@ -126,5 +126,10 @@ func SignUpPost(c *gin.Context) {
 // SignOut 注销登陆
 func SignOut(c *gin.Context) {
 	expireCookie(c)
-	html(c, http.StatusOK, "home/index.tpl", gin.H{})
+	html(c, http.StatusOK, "notify/success.tpl", gin.H{
+		"Info":         "已注销",
+		"Timeout":      3,
+		"RedirectURL":  "/",
+		"RedirectName": "首页",
+	})
 }
