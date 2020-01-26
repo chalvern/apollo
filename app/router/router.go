@@ -18,7 +18,7 @@ func pong(c *gin.Context) {
 func routerInit() {
 	get("ping_pong", "/ping", pong)
 	get("home_page", "/", controllers.HomeIndex)
-	get("about", "/about", pong)
+	get("about", "/about", controllers.HomeAboutHandler)
 
 	// captcha
 	get("captcha_get", initializer.Captcha.URLPrefix+":id", controllers.GetCaptcha)

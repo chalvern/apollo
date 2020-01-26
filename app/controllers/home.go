@@ -16,3 +16,9 @@ func HomeIndex(c *gin.Context) {
 
 	html(c, http.StatusOK, "home/index.tpl", gin.H{})
 }
+
+// HomeAboutHandler 关于
+func HomeAboutHandler(c *gin.Context) {
+	c.Set(PageTitle, "关于")
+	html(c, http.StatusOK, "home/about.tpl", gin.H{})
+}

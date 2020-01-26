@@ -11,12 +11,15 @@
         <a class="navbar-brand" href="/">{{ brand_title }}</a>
       </div>
       <div id="navbar" class="navbar-collapse collapse header-navbar">
-         <ul class="nav navbar-nav navbar-right">
-           <li>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="{{link `home_page`}}">首页</a>
+          </li>
+          <li>
             <a href="{{link `about`}}">关于</a>
-           </li>
-           {{if .Account}}
-             <li>
+          </li>
+          {{if .Account}}
+            <li>
               <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                data-hover="dropdown">
                 设置<span class="caret"></span>
@@ -26,12 +29,12 @@
                 <li><a href="{{link `user_info`}}">个人资料</a></li>
                 <li><a href="{{link `signout`}}">退出</a></li>
               </ul>
-             </li>
+            </li>
            {{ else }}
-             <li><a href="{{link `signin`}}">登录</a></li>
-             <li><a href="{{link `signup`}}">注册</a></li>
-           {{ end }}
-         </ul>
+            <li><a href="{{link `signin`}}">登录</a></li>
+            <li><a href="{{link `signup`}}">注册</a></li>
+          {{ end }}
+        </ul>
       </div>
   </div>
 </nav>
