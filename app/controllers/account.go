@@ -122,3 +122,9 @@ func SignUpPost(c *gin.Context) {
 	})
 
 }
+
+// SignOut 注销登陆
+func SignOut(c *gin.Context) {
+	expireCookie(c)
+	html(c, http.StatusOK, "home/index.tpl", gin.H{})
+}

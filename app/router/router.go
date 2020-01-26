@@ -28,7 +28,7 @@ func routerInit() {
 	post("signup_post", "/signup", controllers.SignUpPost)
 	get("signin", "/signin", controllers.SigninGet)
 	post("signin_post", "/signin", controllers.SignInPost)
-	get("signout", "/signout", pong)
+	get("signout", "/signout", controllers.SignOut)
 
 	// user
 	get("user_info", "/user/info", interceptors.JwtMiddleware(), pong)

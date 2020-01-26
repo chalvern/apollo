@@ -17,7 +17,7 @@ func JwtMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		accessToken, err := c.Cookie(controllers.CookieTag)
 		// 如果没有在 cookie 中拿到 token，继续向下执行即可
-		if err != nil {
+		if err != nil || len(accessToken) == 0 {
 			c.Next()
 			return
 		}

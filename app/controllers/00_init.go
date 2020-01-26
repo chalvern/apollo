@@ -36,3 +36,9 @@ func Init() {
 func setJustCookie(c *gin.Context, token string) {
 	c.SetCookie(CookieTag, token, cookieExprHour, "", cookieDomain, cookieSecure, cookieHTTPOnly)
 }
+
+// 失效 cookie
+func expireCookie(c *gin.Context) {
+	c.SetCookie(CookieTag, "", 0, "", cookieDomain, cookieSecure, cookieHTTPOnly)
+
+}

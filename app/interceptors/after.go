@@ -8,17 +8,18 @@ import (
 // AfterRouterMiddleware 最后一步渲染
 func AfterRouterMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		rawTmpl, ok := c.Get("apollo_tmpl")
+		if !ok {
+			c.Next()
+			return
+		}
+		tmpl := rawTmpl.(string)
+
 		rawCode, ok := c.Get("apollo_code")
 		if !ok {
 			rawCode = http.StatusOK
 		}
 		code := rawCode.(int)
-
-		rawTmpl, ok := c.Get("apollo_tmpl")
-		if !ok {
-			rawTmpl = "home/index.tpl"
-		}
-		tmpl := rawTmpl.(string)
 
 		rawObj, ok := c.Get("apollo_obj")
 		if !ok {
