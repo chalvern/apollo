@@ -10,6 +10,8 @@ func AddFuncMap() {
 
 	// 全局
 	simplate.AddFuncMap("dataFormat", DataFormatHelper)
+	simplate.AddFuncMap("now_year", NowYear)
+
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
 	simplate.AddFuncMap("about_content", PageSideAboutHelper)

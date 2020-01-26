@@ -10,6 +10,13 @@ body {
   background-color: #f8f9fa;
 }
 
+/* footer */
+.footer {
+  margin-top: 10px;
+  border-top: 1px solid #e4e4e4;
+  background-color: #f8f9fa;
+}
+
 .navbar {
   margin-bottom: unset;
 }
