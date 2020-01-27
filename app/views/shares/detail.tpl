@@ -7,7 +7,7 @@
 		</div>
 		<div class="panel-body paginate-bot">
 			<div class="title">
-				{{ .Share.Title }} · （<a href="{{.Share.URL}}">跳转原文</a>）
+				{{ .Share.Title }} ·（<a href="{{.Share.URL}}" target="_blank">跳转原文</a>）
 			</div>
 			<div class="reviews">
 				评述：{{.Share.Review}}

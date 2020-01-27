@@ -79,11 +79,11 @@ body {
   text-align: center;
 }
 
-.media-body .title {
+.media-body .title,.title {
   font-size: 18px;
 }
 
-.media-body .gray {
+.media-body .gray,.gray {
   font-size: 14px;
 }
 
