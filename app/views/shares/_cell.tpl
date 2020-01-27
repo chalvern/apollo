@@ -8,7 +8,7 @@
 	</div>
 	<div class="media-body">
 		<div class="title">
-			<a href="{{link `ping_pong`}}" target="_blank">《{{.Title}}》</a>
+			<a href="{{link `share_detail` `id` .ID}}" target="_blank">《{{.Title}}》</a>
 		</div>
 		<div class="reviews">
 			评述：{{.Review}}

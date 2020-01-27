@@ -39,6 +39,15 @@ func (s *Share) QueryBatch(offset, pageSize int, userPreload bool, args ...inter
 	return
 }
 
+// QueryByID 根据 id 检索
+func (s *Share) QueryByID(id interface{}) (share Share, err error) {
+	db := mydb.Preload("User", func(db *gorm.DB) *gorm.DB {
+		return db.Select("id,nickname")
+	})
+	err = db.Where("id = ?", id).First(&share).Error
+	return
+}
+
 // Create 创建分享
 func (s *Share) Create() error {
 	return mydb.Save(s).Error

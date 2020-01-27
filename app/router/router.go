@@ -30,15 +30,17 @@ func routerInit() {
 	get("signout", "/signout", controllers.SignOut)
 
 	// user
-	get("user_info", "/user/info", controllers.UserInfoHandler)
+	get("user_info", "/user/detail", controllers.UserInfoHandler)
 
 	// tag
-	get("tag_info", "/tag/info", controllers.TagInfoHandler)
+	get("tag_info", "/tag/detail", controllers.TagInfoHandler)
 
 	// url_title
 	get("url_title", "/url/title", controllers.QueryTitleFromURL)
 
 	// share
+	get("share_detail", "/share/detail", controllers.ShareDetailGet)
 	get("share_new_get", "/share/new", controllers.ShareNewGet)
 	post("share_new_post", "/share/new", controllers.ShareNewPost)
+
 }

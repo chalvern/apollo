@@ -31,6 +31,11 @@ func SharesQueryWithContext(c *gin.Context, preloadUser bool, args ...interface{
 	return
 }
 
+// ShareQueryByID 根据 ID 检索对应的分享
+func ShareQueryByID(id interface{}) (model.Share, error) {
+	return shareModel.QueryByID(id)
+}
+
 // SharesQuery 检索分享
 func SharesQuery(page, pageSize int, preloadUser bool, args ...interface{}) (tags []model.Share, total int, err error) {
 	offset := (page - 1) * pageSize
