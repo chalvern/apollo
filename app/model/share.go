@@ -1,9 +1,17 @@
 package model
 
+import "github.com/jinzhu/gorm"
+
+// 分享的状态
+const (
+	ShareStatusCommon = 0
+)
+
 // Share 分享
 type Share struct {
 	Model
 	UserID     uint   `gorm:"index"`             // 用户 ID
+	User       *User  `gorm:"foreignkey:UserID"` // 用户
 	URL        string `gorm:"varchar(1024)"`     // URL
 	Title      string `gorm:"varchar(100)"`      // 分享的文章标题
 	Review     string `gorm:"type:text"`         // 评论
@@ -14,11 +22,16 @@ type Share struct {
 }
 
 // QueryBatch 检索一组
-func (s *Share) QueryBatch(offset, pageSize int, args ...interface{}) (shares []Share, total int, err error) {
+func (s *Share) QueryBatch(offset, pageSize int, userPreload bool, args ...interface{}) (shares []Share, total int, err error) {
 	db := dbArgs(mydb, args...)
 	err = db.Model(Share{}).Count(&total).Error
 	if err != nil {
 		return
+	}
+	if userPreload {
+		db = db.Preload("User", func(db *gorm.DB) *gorm.DB {
+			return db.Select("id,email")
+		})
 	}
 	err = db.Offset(offset).
 		Limit(pageSize).Order("id desc").

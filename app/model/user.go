@@ -22,6 +22,8 @@ type User struct {
 	Email    string `gorm:"type:varchar(100);unique_index" json:"email"`
 	Password string `gorm:"type:varchar(100);" json:"-"`
 
+	NickName string `gorm:"type:varchar(50)" json:"nick_name"` // 昵称
+
 	EmailVarified bool `gorm:"" json:"-"` // 邮件已认证
 
 	ResetPasswordKey string     `gorm:"type:varchar(128)" json:"-"` // 重置密码所需要的key

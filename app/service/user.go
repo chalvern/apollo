@@ -27,7 +27,7 @@ func UserFindByEmail(email string) (*model.User, error) {
 }
 
 // UserSignup 用户注册
-func UserSignup(email, password string) error {
+func UserSignup(email, password, nickName string) error {
 	newUser := &model.User{
 		Email: email,
 	}
@@ -37,6 +37,7 @@ func UserSignup(email, password string) error {
 		return err
 	}
 	newUser.Password = string(hash)
+	newUser.NickName = nickName
 
 	return newUser.Create()
 }

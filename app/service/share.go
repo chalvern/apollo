@@ -1,17 +1,36 @@
 package service
 
-import "github.com/chalvern/apollo/app/model"
+import (
+	"fmt"
+	"strings"
 
-import "fmt"
+	"github.com/chalvern/apollo/app/model"
+	"github.com/gin-gonic/gin"
+)
 
 var (
 	shareModel = model.Share{}
 )
 
+// SharesQueryWithContext 根据 url query 参数检索
+func SharesQueryWithContext(c *gin.Context, page, pageSize int, preloadUser bool) (shares []model.Share, pageRes int, err error) {
+
+	argS, argArray := argsInit()
+	if statusStr := c.Query("s"); statusStr != "" {
+		argS = append(argS, "status=?")
+		argArray = append(argArray, statusStr)
+	}
+	argArray[0] = strings.Join(argS, "AND")
+
+	shares, total, err := SharesQuery(page, pageSize, preloadUser, argArray...)
+	pageRes = total/pageSize + 1
+	return
+}
+
 // SharesQuery 检索分享
-func SharesQuery(page, pageSize int, args ...interface{}) (tags []model.Share, total int, err error) {
+func SharesQuery(page, pageSize int, preloadUser bool, args ...interface{}) (tags []model.Share, total int, err error) {
 	offset := (page - 1) * pageSize
-	return shareModel.QueryBatch(offset, pageSize, args...)
+	return shareModel.QueryBatch(offset, pageSize, preloadUser, args...)
 }
 
 // ShareCreate 创建分享

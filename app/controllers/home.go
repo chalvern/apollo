@@ -3,6 +3,8 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/chalvern/apollo/app/service"
+	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
 )
 
@@ -14,7 +16,23 @@ func HomeIndex(c *gin.Context) {
 		tabString = "0"
 	}
 
-	html(c, http.StatusOK, "home/index.tpl", gin.H{})
+	page := queryPage(c)
+	pageSize := queryPageSize(c)
+
+	shares, allPage, err := service.SharesQueryWithContext(c, page, pageSize, true)
+	if err != nil {
+		sugar.Errorf("HomeIndex-获取 Shares 出错:%s", err.Error())
+		html(c, http.StatusOK, "notify/error.tpl", gin.H{
+			"Timeout": 3,
+		})
+		return
+	}
+
+	html(c, http.StatusOK, "home/index.tpl", gin.H{
+		"Shares":      shares,
+		"CurrentPage": page,
+		"TotalPage":   allPage,
+	})
 }
 
 // HomeAboutHandler 关于

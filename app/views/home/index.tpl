@@ -20,7 +20,7 @@
 		</div>
 		<div class="panel-body paginate-bot">
 			{{range .Shares}}
-				<div class="divide mar-top-5"></div>
+				{{template "shares/_cell.tpl" .}}
 			{{end}}
 			<ul id="page"></ul>
 		</div>

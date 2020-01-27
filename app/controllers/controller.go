@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
@@ -41,4 +42,32 @@ func PageNotFound(c *gin.Context) {
 		"FlashError": "未找到对应的页面",
 	})
 	return
+}
+
+// query 参数
+
+// queryPage 抽取 page 数目
+// 默认从 1 开始计数
+func queryPage(c *gin.Context) int {
+	pageString := c.Query("page")
+	page := 1
+	if pageString != "" {
+		p, err := strconv.Atoi(pageString)
+		if err == nil {
+			page = p
+		}
+	}
+	return page
+}
+
+func queryPageSize(c *gin.Context) int {
+	pageSizeString := c.Query("page_size")
+	pageSize := 20
+	if pageSizeString != "" {
+		p, err := strconv.Atoi(pageSizeString)
+		if err == nil {
+			pageSize = p
+		}
+	}
+	return pageSize
 }
