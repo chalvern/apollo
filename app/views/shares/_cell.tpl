@@ -16,7 +16,7 @@
 		<p class="gray">
 			推荐自 <a href="{{link `user_info` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
 			{{ if .Tag}}
-			<a href="{{link `ping_pong`}}" class="index-share-tag">{{.Tag}}</a>
+			<a href="{{link `tag_info` `t` .Tag}}" class="index-share-tag">{{.Tag}}</a>
 			{{ end }}
 		</p>
 	</div>

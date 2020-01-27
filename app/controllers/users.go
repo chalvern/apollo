@@ -9,7 +9,6 @@ import (
 
 // UserInfoHandler 用户信息页面
 func UserInfoHandler(c *gin.Context) {
-	c.Set(PageTitle, "用户信息")
 	uidString := c.Query("uid")
 	user, err := service.UserFindByUID(uidString)
 	if err != nil {
@@ -19,6 +18,7 @@ func UserInfoHandler(c *gin.Context) {
 		})
 		return
 	}
+	c.Set(PageTitle, user.Nickname)
 
 	page := service.QueryPage(c)
 

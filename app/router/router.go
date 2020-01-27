@@ -32,8 +32,12 @@ func routerInit() {
 	// user
 	get("user_info", "/user/info", controllers.UserInfoHandler)
 
+	// tag
+	get("tag_info", "/tag/info", controllers.TagInfoHandler)
+
 	// url_title
 	get("url_title", "/url/title", controllers.QueryTitleFromURL)
+
 	// share
 	get("share_new_get", "/share/new", controllers.ShareNewGet)
 	post("share_new_post", "/share/new", controllers.ShareNewPost)
