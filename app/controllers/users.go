@@ -20,9 +20,13 @@ func UserInfoHandler(c *gin.Context) {
 		return
 	}
 
-	page := queryPage(c)
-	pageSize := queryPageSize(c)
-	shares, allPage, err := service.SharesQueryWithContext(c, page, pageSize, true, user.ID)
+	page := service.QueryPage(c)
+
+	argS, argArray := argsInit()
+	argS = append(argS, "user_id=?")
+	argArray = append(argArray, user.ID)
+	argArray[0] = argS
+	shares, allPage, err := service.SharesQueryWithContext(c, true, argArray...)
 	if err != nil {
 		sugar.Errorf("UserInfo-获取 Shares 出错:%s", err.Error())
 		return

@@ -87,7 +87,6 @@ func SignUpPost(c *gin.Context) {
 		CaptchaID string `form:"captcha_id" binding:"required"`
 		Captcha   string `form:"captcha" binding:"required"`
 	}{}
-	// https://github.com/go-playground/validator/tree/v8.18.2
 	if errs := c.ShouldBind(&form); errs != nil {
 		sugar.Warnf("SigninPost Bind form Error: %s", errs.Error())
 		// errors := errs.(validator.ValidationErrors)

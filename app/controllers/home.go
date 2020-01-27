@@ -16,10 +16,8 @@ func HomeIndex(c *gin.Context) {
 		tabString = "0"
 	}
 
-	page := queryPage(c)
-	pageSize := queryPageSize(c)
-
-	shares, allPage, err := service.SharesQueryWithContext(c, page, pageSize, true, 0)
+	page := service.QueryPage(c)
+	shares, allPage, err := service.SharesQueryWithContext(c, true)
 	if err != nil {
 		sugar.Errorf("HomeIndex-获取 Shares 出错:%s", err.Error())
 		html(c, http.StatusOK, "notify/error.tpl", gin.H{
