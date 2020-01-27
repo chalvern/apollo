@@ -30,7 +30,7 @@ func routerInit() {
 	get("signout", "/signout", controllers.SignOut)
 
 	// user
-	get("user_info", "/user/info", pong)
+	get("user_info", "/user/info", controllers.UserInfoHandler)
 
 	// url_title
 	get("url_title", "/url/title", controllers.QueryTitleFromURL)

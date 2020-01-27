@@ -41,7 +41,7 @@ body {
 }
 
 
-/* index */
+/* home */
 .index-panel-heading-a {
   padding: 1px 15px;
 }
@@ -74,6 +74,7 @@ body {
   background-color: #b11145;
   line-height: 32px;
 }
+
 .avatar {
   text-align: center;
 }

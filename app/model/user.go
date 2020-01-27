@@ -22,7 +22,7 @@ type User struct {
 	Email    string `gorm:"type:varchar(100);unique_index" json:"email"`
 	Password string `gorm:"type:varchar(100);" json:"-"`
 
-	NickName string `gorm:"type:varchar(50)" json:"nick_name"` // 昵称
+	Nickname string `gorm:"type:varchar(50)" json:"nickname"` // 昵称
 
 	EmailVarified bool `gorm:"" json:"-"` // 邮件已认证
 
@@ -38,6 +38,14 @@ type User struct {
 func (u *User) FindByEmail(email string) (User, error) {
 	user := User{}
 	err := mydb.Model(u).Where("email=?", email).
+		First(&user).Error
+	return user, err
+}
+
+// FindByUID 通过 ID 检索用户
+func (u *User) FindByUID(uid interface{}) (User, error) {
+	user := User{}
+	err := mydb.Model(u).Where("id=?", uid).
 		First(&user).Error
 	return user, err
 }

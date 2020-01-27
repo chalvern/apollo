@@ -2,7 +2,7 @@
 	<div class="media-left">
 		<div class="cell-a-avatar">
 			<a href="{{link `user_info` `uid` .User.ID}}" style="color:white;">
-				<div class="avatar">{{.User.NickName | firstChar}}</div>
+				<div class="avatar">{{.User.Nickname | firstChar}}</div>
 			</a>
 		</div>
 	</div>
@@ -14,7 +14,7 @@
 			评述：{{.Review}}
 		</div>
 		<p class="gray">
-			推荐自 <a href="{{link `user_info` `uid` .User.ID}}">{{.User.NickName}}</a> · 
+			推荐自 <a href="{{link `user_info` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
 			{{ if .Tag}}
 			<a href="{{link `ping_pong`}}" class="index-share-tag">{{.Tag}}</a>
 			{{ end }}

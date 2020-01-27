@@ -26,8 +26,14 @@ func UserFindByEmail(email string) (*model.User, error) {
 	return &user, err
 }
 
+// UserFindByUID 根据 id 检索用户
+func UserFindByUID(uid interface{}) (*model.User, error) {
+	user, err := userModel.FindByUID(uid)
+	return &user, err
+}
+
 // UserSignup 用户注册
-func UserSignup(email, password, nickName string) error {
+func UserSignup(email, password, nickname string) error {
 	newUser := &model.User{
 		Email: email,
 	}
@@ -37,7 +43,7 @@ func UserSignup(email, password, nickName string) error {
 		return err
 	}
 	newUser.Password = string(hash)
-	newUser.NickName = nickName
+	newUser.Nickname = nickname
 
 	return newUser.Create()
 }

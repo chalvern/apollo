@@ -13,12 +13,16 @@ var (
 )
 
 // SharesQueryWithContext 根据 url query 参数检索
-func SharesQueryWithContext(c *gin.Context, page, pageSize int, preloadUser bool) (shares []model.Share, pageRes int, err error) {
+func SharesQueryWithContext(c *gin.Context, page, pageSize int, preloadUser bool, uid uint) (shares []model.Share, pageRes int, err error) {
 
 	argS, argArray := argsInit()
 	if statusStr := c.Query("s"); statusStr != "" {
 		argS = append(argS, "status=?")
 		argArray = append(argArray, statusStr)
+	}
+	if uid != 0 {
+		argS = append(argS, "user_id=?")
+		argArray = append(argArray, uid)
 	}
 	argArray[0] = strings.Join(argS, "AND")
 
