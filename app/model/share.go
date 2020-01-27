@@ -30,7 +30,7 @@ func (s *Share) QueryBatch(offset, pageSize int, userPreload bool, args ...inter
 	}
 	if userPreload {
 		db = db.Preload("User", func(db *gorm.DB) *gorm.DB {
-			return db.Select("id,email")
+			return db.Select("id,nick_name")
 		})
 	}
 	err = db.Offset(offset).

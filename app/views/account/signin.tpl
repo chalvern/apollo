@@ -8,10 +8,6 @@
       <div class="panel-body">
         <form action="{{link `signin`}}" id="signin-form" method="post">
           <div class="form-group">
-            <em style="color: red;">* </em><label for="email">昵称</label>
-            <input type="text" id="nick_name" name="nick_name" class="form-control" placeholder="昵称">
-          </div>
-          <div class="form-group">
             <em style="color: red;">* </em><label for="email">邮箱</label>
             <input type="text" id="email" name="email" class="form-control" placeholder="邮箱">
           </div>
