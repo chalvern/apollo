@@ -64,6 +64,7 @@ func put(name, absolutePath string, handlers ...gin.HandlerFunc) {
 func Init(r *gin.Engine) *gin.Engine {
 
 	routerInit()
+	adminRouterInit()
 	simplateFuncRegistor()
 
 	for _, rc := range routerConfigSlice {

@@ -13,7 +13,7 @@ var (
 )
 
 // SharesQueryWithContext 根据 url query 参数检索
-func SharesQueryWithContext(c *gin.Context, preloadUser bool, args ...interface{}) (shares []model.Share, pageRes int, err error) {
+func SharesQueryWithContext(c *gin.Context, preloadUser bool, args ...interface{}) (shares []model.Share, allPage int, err error) {
 
 	page := queryPage(c)
 	pageSize := queryPageSize(c)
@@ -27,7 +27,7 @@ func SharesQueryWithContext(c *gin.Context, preloadUser bool, args ...interface{
 	argArray[0] = strings.Join(argS, "AND")
 
 	shares, total, err := SharesQuery(page, pageSize, preloadUser, argArray...)
-	pageRes = total/pageSize + 1
+	allPage = total/pageSize + 1
 	return
 }
 

@@ -72,14 +72,13 @@ func SignInPost(c *gin.Context) {
 
 // SignupGet 获取注册页面
 func SignupGet(c *gin.Context) {
-	html(c, http.StatusOK, "account/signup.tpl", gin.H{
-		"PageTitle": "注册",
-	})
+	c.Set(PageTitle, "注册")
+	html(c, http.StatusOK, "account/signup.tpl", gin.H{})
 }
 
 // SignUpPost 注册
 func SignUpPost(c *gin.Context) {
-	pageTitle := "注册"
+	c.Set(PageTitle, "注册")
 	form := struct {
 		Email     string `form:"email" binding:"required,email,lenlte=50"`
 		Password  string `form:"password" binding:"required,lengte=8"`
@@ -92,8 +91,7 @@ func SignUpPost(c *gin.Context) {
 		sugar.Warnf("SigninPost Bind form Error: %s", errs.Error())
 		// errors := errs.(validator.ValidationErrors)
 		html(c, http.StatusOK, "account/signup.tpl", gin.H{
-			"PageTitle": pageTitle,
-			FlashError:  "请检查邮箱、密码、验证码内容及格式是否填写正确",
+			FlashError: "请检查邮箱、密码、验证码内容及格式是否填写正确",
 		})
 		return
 	}
@@ -101,16 +99,14 @@ func SignUpPost(c *gin.Context) {
 	// 验证码校验
 	if !initializer.Captcha.Verify(form.CaptchaID, form.Captcha) {
 		html(c, http.StatusBadRequest, "account/signup.tpl", gin.H{
-			"PageTitle": pageTitle,
-			FlashError:  "验证码错误",
+			FlashError: "验证码错误",
 		})
 		return
 	}
 
 	if err := service.UserSignup(form.Email, form.Password, form.NickName); err != nil {
 		html(c, http.StatusBadRequest, "account/signup.tpl", gin.H{
-			"PageTitle": pageTitle,
-			FlashError:  "创建用户失败，邮箱已注册",
+			FlashError: "创建用户失败，邮箱已注册",
 		})
 		return
 	}

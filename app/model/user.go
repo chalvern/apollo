@@ -34,6 +34,19 @@ type User struct {
 	Priority int `gorm:"default:0" json:"priority"` // 权限优先级
 }
 
+// QueryBatch 检索一组
+func (u *User) QueryBatch(offset, pageSize int, args ...interface{}) (users []User, total int, err error) {
+	db := dbArgs(mydb, args...)
+	err = db.Model(User{}).Count(&total).Error
+	if err != nil {
+		return
+	}
+	err = db.Offset(offset).
+		Limit(pageSize).Order("id desc").
+		Find(&users).Error
+	return
+}
+
 // FindByEmail 根据 Email 检索用户
 func (u *User) FindByEmail(email string) (User, error) {
 	user := User{}
@@ -59,4 +72,12 @@ func (u *User) Create() error {
 		return fmt.Errorf("创建用户时密码不能为空")
 	}
 	return mydb.Save(u).Error
+}
+
+// Update 更新
+func (u *User) Update() error {
+	if u.ID == 0 {
+		return fmt.Errorf("用户 更新必须设置 ID")
+	}
+	return mydb.Model(u).Updates(u).Error
 }
