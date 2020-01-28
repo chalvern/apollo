@@ -61,6 +61,7 @@ func SignInPost(c *gin.Context) {
 	}
 	setJustCookie(c, token)
 
+	c.Set("user", u)
 	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "登陆成功 😆😆😆",
 		"Timeout":      3,
@@ -125,6 +126,8 @@ func SignUpPost(c *gin.Context) {
 
 // SignOut 注销登陆
 func SignOut(c *gin.Context) {
+	c.Set(PageTitle, "注销")
+	c.Set("user", nil)
 	expireCookie(c)
 	html(c, http.StatusOK, "notify/success.tpl", gin.H{
 		"Info":         "已注销",

@@ -28,7 +28,7 @@ func routerInit() {
 	post("signup_post", "/signup", i.UserMustNotExistMiddleware(), controllers.SignUpPost)
 	get("signin", "/signin", i.UserMustNotExistMiddleware(), controllers.SigninGet)
 	post("signin_post", "/signin", i.UserMustNotExistMiddleware(), controllers.SignInPost)
-	get("signout", "/signout", i.UserMustNotExistMiddleware(), controllers.SignOut)
+	get("signout", "/signout", controllers.SignOut)
 
 	// user
 	get("user_detail", "/user/detail", controllers.UserInfoHandler)
