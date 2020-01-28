@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// TagInfoHandler 用户信息页面
+// TagInfoHandler 标签信息页面
 func TagInfoHandler(c *gin.Context) {
 	tagName := c.Query("t")
 	if tagName == "" {

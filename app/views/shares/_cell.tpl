@@ -14,7 +14,7 @@
 			</span>
 		</div>
 		<div class="reviews">
-			评述：{{.Review}}
+			评述：{{str_limit_length .Review 100}}
 		</div>
 		<p class="gray">
 			推荐自 <a href="{{link `user_detail` `uid` .User.ID}}">{{.User.Nickname}}</a> · 

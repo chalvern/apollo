@@ -24,7 +24,7 @@
                 placeholder="陈述了什么事实？说明了什么问题？为什么推荐？"></textarea>
           </div>
           <div class="form-group">
-            <label for="title">标签</label>
+            <em style="color: red;">* </em><label for="title">标签</label>
             <input type="text" id="tag" name="tag" class="form-control" placeholder="标签，比如：java"></input>
           </div>
           <input type="submit" class="btn btn-default" value="提交"></input>

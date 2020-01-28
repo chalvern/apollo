@@ -1,7 +1,9 @@
 package helper
 
-import "github.com/spf13/viper"
-import "github.com/chalvern/apollo/configs/constants"
+import (
+	"github.com/chalvern/apollo/configs/constants"
+	"github.com/spf13/viper"
+)
 
 // PageTitleHelper 组装得到和页面 title
 func PageTitleHelper(title string) string {
@@ -30,4 +32,13 @@ func FirstCharacterOfHelper(name string) string {
 		return "U"
 	}
 	return name[:1]
+}
+
+// StringLimitLengthHelper 返回特定长度的内容
+func StringLimitLengthHelper(rawStr string, limitLen int) string {
+	rawRune := []rune(rawStr)
+	if len(rawRune) > limitLen {
+		return string(rawRune[:limitLen]) + "..."
+	}
+	return rawStr
 }

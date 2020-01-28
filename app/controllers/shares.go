@@ -68,7 +68,7 @@ func ShareNewPost(c *gin.Context) {
 	form := struct {
 		URL    string `form:"url" binding:"required,url"`
 		Title  string `form:"title" binding:"required,lengte=1"`
-		Review string `form:"review" binding:"required,lenlte=30"`
+		Review string `form:"review" binding:"required,lenlte=800"`
 		Tag    string `form:"tag" binding:"required"`
 	}{}
 
@@ -155,7 +155,7 @@ func ShareEditPost(c *gin.Context) {
 	form := struct {
 		URL    string `form:"url" binding:"required,url"`
 		Title  string `form:"title" binding:"required,lengte=1"`
-		Review string `form:"review" binding:"required,lenlte=30"`
+		Review string `form:"review" binding:"required,lenlte=800"`
 		Tag    string `form:"tag" binding:"required"`
 	}{}
 	if errs := c.ShouldBind(&form); errs != nil {
