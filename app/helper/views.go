@@ -15,6 +15,8 @@ func AddFuncMap() {
 	simplate.AddFuncMap("account_normal", AccountNormalHelper)
 	simplate.AddFuncMap("account_manager", AccountManagerHelper)
 
+	simplate.AddFuncMap("account_has_share_edit_authority", AccountHasShareEditAuthority)
+
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
 	simplate.AddFuncMap("about_content", PageSideAboutHelper)

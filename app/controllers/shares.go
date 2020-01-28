@@ -22,8 +22,9 @@ func ShareDetailGet(c *gin.Context) {
 		})
 		return
 	}
+	share.Click(share.ID)
 	htmlOfOk(c, "shares/detail.tpl", gin.H{
-		"Share": share,
+		"Share": &share,
 	})
 }
 
@@ -111,7 +112,7 @@ func ShareEditGet(c *gin.Context) {
 	}
 
 	htmlOfOk(c, "shares/edit.tpl", gin.H{
-		"Share": share,
+		"Share": &share,
 	})
 }
 

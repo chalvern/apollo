@@ -26,3 +26,14 @@ func AccountManagerHelper(u *model.User) bool {
 	}
 	return false
 }
+
+// AccountHasShareEditAuthority 用户对分享是否有编辑权限
+func AccountHasShareEditAuthority(s *model.Share, u *model.User) bool {
+	if u == nil || s == nil {
+		return false
+	}
+	if s.UserID == u.ID || u.Priority&model.UserPriorityManager > 0 {
+		return true
+	}
+	return false
+}

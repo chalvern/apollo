@@ -15,6 +15,9 @@
 			<div class="detail-status">
 				作者：<a href="{{link `user_detail` `uid` .Share.User.ID}}">{{.Share.User.Nickname}}</a> · 
 				点击：{{.Share.ClickCount}} 次
+				{{if account_has_share_edit_authority .Share .Account}}
+				 · <a href="{{link `share_edit_get` `id` .Share.ID}}">编辑</a>
+				{{end}}
 			</div>
 			<div class="divide mar-top-5"></div>
 			<div class="reviews">
