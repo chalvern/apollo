@@ -15,16 +15,29 @@ func ShareDetailGet(c *gin.Context) {
 	c.Set(PageTitle, "分享详情")
 	share, err := service.ShareQueryByID(c.Query("id"))
 	if err != nil || share.ID == 0 {
-		sugar.Warnf("ShareGet 未检索到对应的分享，id=%v", c.Query("id"))
+		sugar.Warnf("ShareDetailGet 未检索到对应的分享，id=%v", c.Query("id"))
+		html(c, http.StatusOK, "notify/error.tpl", gin.H{
+			"Info": "对应条目找不到了，请看看别的吧",
+		})
+		return
+	}
+	htmlOfOk(c, "shares/detail.tpl", gin.H{
+		"Share": share,
+	})
+}
+
+// ShareRedirect 直接跳转
+func ShareRedirect(c *gin.Context) {
+	share, err := service.ShareQueryByID(c.Query("id"))
+	if err != nil || share.ID == 0 {
+		sugar.Warnf("ShareRedirect 未检索到对应的分享，id=%v", c.Query("id"))
 		html(c, http.StatusOK, "notify/error.tpl", gin.H{
 			"Info": "对应条目找不到了，请看看别的吧",
 		})
 		return
 	}
 	share.Click(share.ID)
-	htmlOfOk(c, "shares/detail.tpl", gin.H{
-		"Share": share,
-	})
+	c.Redirect(http.StatusSeeOther, share.URL)
 }
 
 // ShareNewGet 创建分享的表单

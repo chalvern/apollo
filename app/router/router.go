@@ -41,6 +41,7 @@ func routerInit() {
 
 	// share
 	get("share_detail", "/share/detail", controllers.ShareDetailGet)
+	get("share_direct_jump", "/share/redirect", controllers.ShareRedirect)
 	get("share_new_get", "/share/new", i.UserMustExistMiddleware(), controllers.ShareNewGet)
 	post("share_new_post", "/share/new", i.UserMustExistMiddleware(), controllers.ShareNewPost)
 

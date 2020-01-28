@@ -13,9 +13,6 @@
 				<li id="tab_0">
 					<a href="{{link `home_page` `t` `0`}}" style="padding: 1px 15px;">全部</a>
 				</li>
-				<li id="tab_1">
-					<a href="{{link `home_page` `t` `1`}}" style="padding: 1px 15px;">精选</a>
-				</li>
 			</ul>
 		</div>
 		<div class="panel-body paginate-bot">

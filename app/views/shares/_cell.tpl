@@ -9,15 +9,16 @@
 	<div class="media-body">
 		<div class="title">
 			<a href="{{link `share_detail` `id` .ID}}" target="_blank">《{{.Title}}》</a>
+			<span style="font-size: 14px">
+				(<a href="{{link `share_direct_jump` `id` .ID}}" target="_blank">原文</a>)
+			</span>
 		</div>
 		<div class="reviews">
 			评述：{{.Review}}
 		</div>
 		<p class="gray">
 			推荐自 <a href="{{link `user_detail` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
-			{{ if .Tag}}
 			<a href="{{link `tag_detail` `t` .Tag}}" class="index-share-tag">{{.Tag}}</a>
-			{{ end }}
 		</p>
 	</div>
 </div>

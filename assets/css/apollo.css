@@ -92,7 +92,7 @@ body {
   margin: 10px;
 }
 
-
+/* 占位符，如果 body 太短可用来避免 footer 难看地展示 */
 .placeholder-body {
   margin: 200px 0;
 }
@@ -104,4 +104,9 @@ body {
   width: 100%;
   padding: 10px;
   margin:5px 0;
+}
+
+/* share detail */
+.detail-status {
+  font-size: 14px;
 }
