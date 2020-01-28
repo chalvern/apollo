@@ -8,7 +8,7 @@
 	</div>
 	<div class="media-body">
 		<div class="title">
-			<a href="{{link `share_detail` `id` .ID}}" target="_blank">《{{.Title}}》</a>
+			<a href="{{link `share_detail` `id` .ID}}" target="_blank">《{{.Title}}》</a>· 
 			<span style="font-size: 14px">
 				(<a href="{{link `share_direct_jump` `id` .ID}}" target="_blank">原文</a>)
 			</span>

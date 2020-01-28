@@ -21,7 +21,7 @@
           <div class="form-group">
             <em style="color: red;">* </em><label for="review">简单评论</label>
             <textarea id="review" name="review" class="form-control" rows="3"
-                placeholder="陈述了什么事实？说明了什么问题？为什么推荐？#标签1##标签2# "></textarea>
+                placeholder="陈述了什么事实？说明了什么问题？为什么推荐？"></textarea>
           </div>
           <div class="form-group">
             <label for="title">标签</label>

@@ -9,3 +9,7 @@
 <div class="body-sidebar hidden-xs hidden-sm">
   {{template "components/_sidebar-about.tpl" . }}
 </div>
+
+<div class="body-sidebar hidden-xs hidden-sm">
+    {{template "components/_friend_link.tpl" . }}
+</div>
