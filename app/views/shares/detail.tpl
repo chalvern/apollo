@@ -27,8 +27,8 @@
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-body paginate-bot">
-			{{if .Shares}}
-				{{range .Shares}}
+			{{if .Comments}}
+				{{range .Comments}}
 					{{template "shares/_cell.tpl" . }}
 				{{end}}
 			{{ else }}
@@ -42,3 +42,7 @@
 	{{template "home/_sidebar.tpl" . }}
 </div>
 </div>
+
+{{if not .Comments}}
+<div class="placeholder-body"></div>
+{{end}}
