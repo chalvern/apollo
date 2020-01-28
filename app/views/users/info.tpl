@@ -9,7 +9,7 @@
 <div class="col-md-9 mt-3"> 
 	<div class="panel panel-default">
 		<div class="panel-heading index-panel-heading">
-			<div class="user_info">
+			<div class="user_detail">
 				用户：{{ .User.Nickname }}
 			</div>
 		</div>

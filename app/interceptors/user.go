@@ -40,11 +40,11 @@ func JwtMiddleware() gin.HandlerFunc {
 	}
 }
 
-// UserShouldExistMiddleware 检查用户登录
-func UserShouldExistMiddleware() gin.HandlerFunc {
+// UserMustExistMiddleware 检查用户登录
+func UserMustExistMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if _, exists := c.Get("user"); !exists {
-			c.HTML(http.StatusOK, "notify/error.tmpl", gin.H{
+			c.HTML(http.StatusOK, "notify/error.tpl", gin.H{
 				"PageTitle":  "出错了",
 				"FlashError": "用户未登录",
 			})
@@ -55,13 +55,14 @@ func UserShouldExistMiddleware() gin.HandlerFunc {
 	}
 }
 
-// UserShouldNotExistMiddleware 检查用户未登录
-func UserShouldNotExistMiddleware() gin.HandlerFunc {
+// UserMustNotExistMiddleware 检查用户未登录
+func UserMustNotExistMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if _, exists := c.Get("user"); exists {
-			c.HTML(http.StatusOK, "notify/error.tmpl", gin.H{
+		if account, exists := c.Get("user"); exists {
+			c.HTML(http.StatusOK, "notify/error.tpl", gin.H{
 				"PageTitle":  "出错了",
 				"FlashError": "用户已经登录",
+				"Account":    account,
 			})
 			c.Abort()
 			return

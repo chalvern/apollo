@@ -3,7 +3,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading index-panel-heading">
 			<a href="{{link `home_page`}}">首页</a> | 
-			<a href="{{link `tag_info` `t` .Share.Tag}}">{{.Share.Tag}}</a>
+			<a href="{{link `tag_detail` `t` .Share.Tag}}">{{.Share.Tag}}</a>
 		</div>
 		<div class="panel-body paginate-bot">
 			<div class="title">

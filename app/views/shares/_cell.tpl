@@ -1,7 +1,7 @@
 <div class="media">
 	<div class="media-left">
 		<div class="cell-a-avatar">
-			<a href="{{link `user_info` `uid` .User.ID}}" style="color:white;">
+			<a href="{{link `user_detail` `uid` .User.ID}}" style="color:white;">
 				<div class="avatar">{{.User.Nickname | firstChar}}</div>
 			</a>
 		</div>
@@ -14,9 +14,9 @@
 			评述：{{.Review}}
 		</div>
 		<p class="gray">
-			推荐自 <a href="{{link `user_info` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
+			推荐自 <a href="{{link `user_detail` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
 			{{ if .Tag}}
-			<a href="{{link `tag_info` `t` .Tag}}" class="index-share-tag">{{.Tag}}</a>
+			<a href="{{link `tag_detail` `t` .Tag}}" class="index-share-tag">{{.Tag}}</a>
 			{{ end }}
 		</p>
 	</div>
