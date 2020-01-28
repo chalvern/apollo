@@ -58,7 +58,7 @@ func ShareUpdates(share *model.Share, user *model.User) error {
 	if share.ID == 0 {
 		return fmt.Errorf("更新分享必须是已存在的分享内容")
 	}
-	// 只有本人 或者 管理员 可以修改
+	// 只能本人或者管理员有修改分享的权限
 	if share.UserID == user.ID || user.Priority&model.UserPriorityManager != 0 {
 		return share.Update()
 	}

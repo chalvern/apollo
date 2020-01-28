@@ -2,6 +2,8 @@ package model
 
 import "github.com/jinzhu/gorm"
 
+import "fmt"
+
 // 分享的状态
 const (
 	ShareStatusCommon = 0
@@ -55,7 +57,10 @@ func (s *Share) Create() error {
 
 // Update 更新
 func (s *Share) Update() error {
-	return mydb.Save(s).Error
+	if s.ID == 0 {
+		return fmt.Errorf("Share 更新必须设置 ID")
+	}
+	return mydb.Model(s).Updates(s).Error
 }
 
 // Click 点击量

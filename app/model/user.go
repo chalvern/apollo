@@ -7,10 +7,10 @@ import (
 
 // 用户身份
 const (
-	UserPriorityUnValid = 0      // 未经任何认证
-	UserPriorityCommon  = 2 ^ 0  // 普通用户
-	UserPriorityAdmin   = 2 ^ 10 // 管理员
-	UserPrioritySuper   = 2 ^ 11 // 超级管理员
+	UserPriorityUnValid = 0       // 未经任何认证
+	UserPriorityCommon  = 1 << 0  // 普通用户
+	UserPriorityAdmin   = 1 << 10 // 管理员
+	UserPrioritySuper   = 1 << 11 // 超级管理员
 
 	UserPriorityManager = UserPriorityAdmin | UserPrioritySuper
 )

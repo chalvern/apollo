@@ -13,6 +13,7 @@ func AddFuncMap() {
 	simplate.AddFuncMap("now_year", NowYear)
 
 	simplate.AddFuncMap("account_normal", AccountNormalHelper)
+	simplate.AddFuncMap("account_manager", AccountManagerHelper)
 
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
