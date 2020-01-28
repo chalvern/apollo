@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/chalvern/apollo/app/model"
@@ -63,4 +64,12 @@ func UserSignup(email, password, nickname string) error {
 	newUser.Nickname = nickname
 
 	return newUser.Create()
+}
+
+// UserUpdates 更新用户
+func UserUpdates(user *model.User) error {
+	if user.ID == 0 {
+		return fmt.Errorf("更新分享必须是已存在的用户")
+	}
+	return user.Update()
 }
