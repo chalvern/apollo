@@ -22,7 +22,14 @@ func ShareDetailGet(c *gin.Context) {
 		})
 		return
 	}
-	share.Click(share.ID)
+	// 非用户本身才加 1
+	userTmp, exists := c.Get("user")
+	if exists {
+		user := userTmp.(*model.User)
+		if share.UserID != user.ID {
+			share.Click(share.ID)
+		}
+	}
 	htmlOfOk(c, "shares/detail.tpl", gin.H{
 		"Share": &share,
 	})
@@ -38,7 +45,14 @@ func ShareRedirect(c *gin.Context) {
 		})
 		return
 	}
-	share.Click(share.ID)
+	// 非用户本身才加 1
+	userTmp, exists := c.Get("user")
+	if exists {
+		user := userTmp.(*model.User)
+		if share.UserID != user.ID {
+			share.Click(share.ID)
+		}
+	}
 	c.Redirect(http.StatusSeeOther, share.URL)
 }
 

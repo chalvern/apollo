@@ -1,8 +1,6 @@
 package helper
 
-import (
-	"github.com/chalvern/apollo/app/model"
-)
+import "github.com/chalvern/apollo/app/model"
 
 // AccountNormalHelper 用户鉴权
 // 用户拥有基本的权限（用户初始化后 priority=0，不具有基本权限）

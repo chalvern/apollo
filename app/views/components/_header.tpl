@@ -26,7 +26,7 @@
               </a>
               <span class="dropdown-arrow"></span>
               <ul class="dropdown-menu">
-                <li><a href="{{link `user_detail`}}">个人资料</a></li>
+                <li><a href="{{link `user_detail` `uid` .Account.ID}}">个人资料</a></li>
                 <li><a href="{{link `signout`}}">退出</a></li>
               </ul>
             </li>
