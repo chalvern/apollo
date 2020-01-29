@@ -29,6 +29,8 @@ func ShareDetailGet(c *gin.Context) {
 		if share.UserID != user.ID {
 			share.Click(share.ID)
 		}
+	} else {
+		share.Click(share.ID)
 	}
 	htmlOfOk(c, "shares/detail.tpl", gin.H{
 		"Share": &share,
@@ -52,6 +54,8 @@ func ShareRedirect(c *gin.Context) {
 		if share.UserID != user.ID {
 			share.Click(share.ID)
 		}
+	} else {
+		share.Click(share.ID)
 	}
 	c.Redirect(http.StatusSeeOther, share.URL)
 }
