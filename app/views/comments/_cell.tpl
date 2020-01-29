@@ -11,5 +11,6 @@
 			{{str2html (.Reply|markdown)}}
 		</div>
 	</div>
+	<div class="media-right">#{{.Number}}</div>
 </div>
 <div class="divide mar-top-5"></div>

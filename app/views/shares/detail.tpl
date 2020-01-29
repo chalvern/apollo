@@ -31,10 +31,10 @@
 				{{range .Comments}}
 					{{template "comments/_cell.tpl" . }}
 				{{end}}
+				<ul id="page"></ul>
 			{{ else }}
 				<p>暂无评论</p>
 			{{ end }}
-			<ul id="page"></ul>
 		</div>
 	</div>
 	
