@@ -21,7 +21,7 @@
 			</div>
 			<div class="divide mar-top-5"></div>
 			<div class="reviews">
-				评述：{{.Share.Review}}
+				评述：{{str2html (.Share.Review|markdown)}}
 			</div>
 		</div>
 	</div>

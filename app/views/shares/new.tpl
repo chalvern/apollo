@@ -19,7 +19,7 @@
             <textarea id="title" name="title" class="form-control" rows="1" placeholder="分享标题"></textarea>
           </div>
           <div class="form-group">
-            <em style="color: red;">* </em><label for="review">简单评论</label>
+            <em style="color: red;">* </em><label for="review">简单评论（支持markdown）</label>
             <textarea id="review" name="review" class="form-control" rows="3"
                 placeholder="陈述了什么事实？说明了什么问题？为什么推荐？"></textarea>
           </div>

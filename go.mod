@@ -14,6 +14,7 @@ require (
 	github.com/go-resty/resty/v2 v2.1.0
 	github.com/jinzhu/gorm v1.9.2
 	github.com/prometheus/client_golang v0.9.3
+	github.com/russross/blackfriday/v2 v2.0.1
 	github.com/spf13/jwalterweatherman v1.1.0
 	github.com/spf13/viper v1.6.1
 	github.com/stretchr/testify v1.4.0

@@ -20,7 +20,10 @@ func AddFuncMap() {
 	simplate.AddFuncMap("pageTitle", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
 	simplate.AddFuncMap("about_content", PageSideAboutHelper)
+
 	simplate.AddFuncMap("str_limit_length", StringLimitLengthHelper)
+	simplate.AddFuncMap("markdown", MarkdownHelper)
+	simplate.AddFuncMap("str2html", Str2html)
 
 	simplate.AddFuncMap("create_captcha", initializer.Captcha.CreateCaptchaHTML)
 	simplate.AddFuncMap("firstChar", FirstCharacterOfHelper)

@@ -33,12 +33,3 @@ func FirstCharacterOfHelper(name string) string {
 	}
 	return name[:1]
 }
-
-// StringLimitLengthHelper 返回特定长度的内容
-func StringLimitLengthHelper(rawStr string, limitLen int) string {
-	rawRune := []rune(rawStr)
-	if len(rawRune) > limitLen {
-		return string(rawRune[:limitLen]) + "..."
-	}
-	return rawStr
-}
