@@ -22,7 +22,7 @@ func init() {
 				Email    string `gorm:"type:varchar(100);unique_index" json:"email"`
 				Password string `gorm:"type:varchar(100);" json:"-"`
 
-				NickName string `gorm:"type:varchar(50)" json:"nick_name"`
+				Nickname string `gorm:"type:varchar(50)" json:"nick_name"`
 
 				EmailVarified bool `gorm:"" json:"-"` // 邮件已认证
 
