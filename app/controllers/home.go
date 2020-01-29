@@ -31,6 +31,7 @@ func HomeIndex(c *gin.Context) {
 		"TabIndex":    tabString,
 		"CurrentPage": page,
 		"TotalPage":   allPage,
+		"SideTags":    service.TagsRecommendQuery(),
 	})
 }
 

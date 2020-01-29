@@ -2,11 +2,10 @@
 	<div class="col-md-9 mt-3"> 
 		<div class="panel panel-default">
 			<div class="panel-heading index-panel-heading">
-				<ul class="nav nav-pills">
-					<li id="tab_0">
-						<a href="/tags" style="padding: 1px 15px;">标签</a>
-					</li>
-				</ul>
+				<a href="{{link `tag_list`}}" style="padding: 1px 15px;">标签</a>
+				{{if account_manager .Account}}
+					| <a href="{{link `tag_new_get`}}">新建标签</a>
+				{{end}}
 			</div>
 			<div class="panel-body paginate-bot">
 				{{range .Tags}}

@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/chalvern/apollo/app/model"
+	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
 )
 
@@ -30,6 +31,15 @@ func TagsQueryWithContext(c *gin.Context, args ...interface{}) (tags []model.Tag
 func TagsQuery(page, pageSize int, args ...interface{}) (tags []model.Tag, total int, err error) {
 	offset := (page - 1) * pageSize
 	return tagModel.QueryBatch(offset, pageSize, args...)
+}
+
+// TagsRecommendQuery 检索推荐的标签（目前定义为最新的 30 个标签）
+func TagsRecommendQuery() (tags []model.Tag) {
+	tags, _, err := TagsQuery(1, 30)
+	if err != nil {
+		sugar.Warnf("TagsRecommendQuery 出错：%s", err.Error())
+	}
+	return tags
 }
 
 // TagQueryByName 根据名称检索

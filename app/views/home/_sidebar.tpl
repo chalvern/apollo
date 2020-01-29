@@ -13,3 +13,5 @@
 <div class="body-sidebar hidden-xs hidden-sm">
     {{template "components/_friend_link.tpl" . }}
 </div>
+
+{{template "tags/_taglist.tpl" . }}
