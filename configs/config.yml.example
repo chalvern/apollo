@@ -2,6 +2,10 @@ core:
   # develop/stage/production
   env: develop
 
+pubsub:
+  gochan_num: 2
+  buffer_num: 3
+
 jwt:
   hmac_secret: 123456
 
