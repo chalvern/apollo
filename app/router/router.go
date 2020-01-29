@@ -5,6 +5,7 @@ import (
 
 	"github.com/chalvern/apollo/app/controllers"
 	i "github.com/chalvern/apollo/app/interceptors"
+	"github.com/chalvern/apollo/app/model"
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/gin-gonic/gin"
 )
@@ -36,6 +37,10 @@ func routerInit() {
 	// tag
 	get("tag_list", "/tag/list", controllers.TagsListHandler)
 	get("tag_detail", "/tag/detail", controllers.TagInfoHandler)
+	get("tag_new_get", "/tag/new", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagNewGet)
+	post("tag_new_post", "/tag/new", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagNewPost)
+	get("tag_edit_get", "/tag/edit", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagEditGet)
+	post("tag_edit_post", "/tag/edit", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagEditPost)
 
 	// url_title
 	get("url_title", "/url/title", controllers.QueryTitleFromURL)

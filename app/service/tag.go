@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/chalvern/apollo/app/model"
@@ -31,10 +32,21 @@ func TagsQuery(page, pageSize int, args ...interface{}) (tags []model.Tag, total
 	return tagModel.QueryBatch(offset, pageSize, args...)
 }
 
+// TagQueryByName 根据名称检索
+func TagQueryByName(tagName string) (tag model.Tag, err error) {
+	return tagModel.QueryByName(tagName)
+}
+
 // TagCreate 创建标签
-func TagCreate(name string) error {
-	tag := model.Tag{
-		Name: strings.ToLower(name),
-	}
+func TagCreate(tag *model.Tag) error {
+	tag.Name = strings.ToLower(tag.Name)
 	return tag.Create()
+}
+
+// TagUpdates 更新分享
+func TagUpdates(tag *model.Tag) error {
+	if tag.ID == 0 {
+		return fmt.Errorf("更新标签必须是已存在的分享内容")
+	}
+	return tag.Update()
 }

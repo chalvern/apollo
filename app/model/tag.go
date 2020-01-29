@@ -39,3 +39,11 @@ func (t *Tag) Create() error {
 	}
 	return mydb.Save(t).Error
 }
+
+// Update 更新
+func (t *Tag) Update() error {
+	if t.ID == 0 {
+		return fmt.Errorf("Tag 更新必须设置 ID")
+	}
+	return mydb.Model(t).Updates(t).Error
+}

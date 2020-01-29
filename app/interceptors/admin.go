@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// AdminUserMiddleware 检查用户登录
-func AdminUserMiddleware() gin.HandlerFunc {
+// UserPriorityMiddleware 检查用户登录
+func UserPriorityMiddleware(pMast int) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		accountRaw, exists := c.Get("user")
 		if !exists {
@@ -20,7 +20,7 @@ func AdminUserMiddleware() gin.HandlerFunc {
 			return
 		}
 		account := accountRaw.(*model.User)
-		if account.Priority&model.UserPrioritySuper == 0 {
+		if account.Priority&pMast == 0 {
 			c.HTML(http.StatusOK, "notify/error.tpl", gin.H{
 				"PageTitle":  "出错了",
 				"FlashError": "用户非管理员",
