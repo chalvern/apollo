@@ -60,3 +60,21 @@ func TagUpdates(tag *model.Tag) error {
 	}
 	return tag.Update()
 }
+
+// TagUpdateCount 更新 tag 的数目
+// 某个 Tag 下面有多少个分享
+func TagUpdateCount(tagName string) error {
+	count, err := shareModel.AggregateTagCount(tagName)
+	if err != nil {
+		return err
+	}
+	tag, err := tagModel.QueryByName(tagName)
+	if err != nil {
+		return err
+	}
+	tagNew := model.Tag{
+		Count: count,
+	}
+	tagNew.ID = tag.ID
+	return tagNew.Update()
+}

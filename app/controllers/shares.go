@@ -6,6 +6,7 @@ import (
 
 	"github.com/chalvern/apollo/app/helper"
 	"github.com/chalvern/apollo/app/model"
+	"github.com/chalvern/apollo/app/pubsub"
 	"github.com/chalvern/apollo/app/service"
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
@@ -100,6 +101,12 @@ func ShareNewPost(c *gin.Context) {
 		})
 		return
 	}
+
+	// 异步更新标签信息
+	pubsub.Dispatch(int(share.ID), func() error {
+		return service.TagUpdateCount(share.Tag)
+	})
+
 	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "发布成功!",
 		"Timeout":      3,

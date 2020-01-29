@@ -74,3 +74,9 @@ func (s *Share) Star(shareID uint) error {
 	err := mydb.Exec("UPDATE shares SET star_count = star_count + 1 WHERE id = ?", shareID).Error
 	return err
 }
+
+// AggregateTagCount 某个 Tag 有多少个 share
+func (s *Share) AggregateTagCount(tagName string) (count int, err error) {
+	err = mydb.Model(s).Where("tag=?", tagName).Count(&count).Error
+	return
+}

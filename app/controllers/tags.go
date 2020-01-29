@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/chalvern/apollo/app/model"
+	"github.com/chalvern/apollo/app/pubsub"
 	"github.com/chalvern/apollo/app/service"
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
@@ -55,6 +56,7 @@ func TagInfoHandler(c *gin.Context) {
 		"Shares":      shares,
 		"CurrentPage": page,
 		"TotalPage":   allPage,
+		"SideTags":    service.TagsRecommendQuery(),
 	})
 }
 
@@ -101,6 +103,11 @@ func TagNewPost(c *gin.Context) {
 		})
 		return
 	}
+	// 异步更新标签信息
+	pubsub.Dispatch(int(tag.ID), func() error {
+		return service.TagUpdateCount(tag.Name)
+	})
+
 	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "创建成功!",
 		"Timeout":      3,
@@ -174,6 +181,11 @@ func TagEditPost(c *gin.Context) {
 		})
 		return
 	}
+	// 异步更新标签信息
+	pubsub.Dispatch(int(tag.ID), func() error {
+		return service.TagUpdateCount(tag.Name)
+	})
+
 	htmlOfOk(c, "notify/success.tpl", gin.H{
 		"Info":         "更新成功!",
 		"Timeout":      3,

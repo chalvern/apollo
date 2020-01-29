@@ -4,6 +4,7 @@ go 1.13
 
 require (
 	github.com/asaskevich/govalidator v0.0.0-20200108200545-475eaeb16496
+	github.com/chalvern/gochan v0.3.1
 	github.com/chalvern/simplate v0.1.0
 	github.com/chalvern/sugar v0.2.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible

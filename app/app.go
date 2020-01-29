@@ -10,6 +10,7 @@ import (
 	"github.com/chalvern/apollo/app/controllers"
 	"github.com/chalvern/apollo/app/helper"
 	"github.com/chalvern/apollo/app/model"
+	"github.com/chalvern/apollo/app/pubsub"
 	"github.com/chalvern/apollo/app/router"
 	"github.com/chalvern/apollo/configs/constants"
 	"github.com/chalvern/apollo/tools/validator"
@@ -36,6 +37,7 @@ func Run(ctx context.Context) {
 	// 1.1 初始化 model/controller 等
 	model.Init()
 	controllers.Init()
+	pubsub.Init()
 
 	// 2. initial gin
 	// 2. 初始化 gin

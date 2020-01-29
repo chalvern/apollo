@@ -15,6 +15,8 @@ github.com/beorn7/perks v1.0.0/go.mod h1:KWe93zE9D1o94FZ5RNwFwVgaQK1VOXiVxmqh+Ce
 github.com/bradfitz/gomemcache v0.0.0-20180710155616-bc664df96737 h1:rRISKWyXfVxvoa702s91Zl5oREZTrR3yv+tXrrX7G/g=
 github.com/bradfitz/gomemcache v0.0.0-20180710155616-bc664df96737/go.mod h1:PmM6Mmwb0LSuEubjR8N7PtNe1KxZLtOUHtbeikc5h60=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
+github.com/chalvern/gochan v0.3.1 h1:0iAg3AO7OuneSStNOAtV3IqB0B0yuGKbgsSDX0UKuQ8=
+github.com/chalvern/gochan v0.3.1/go.mod h1:yJEuNu1Nk+mDI28sQdJYHj82LQtpqSoovVHh/H//iYA=
 github.com/chalvern/simplate v0.1.0 h1:DY8+bshFo1vr87H9DZmmCc3gvJMrI3T76y9/aUQtLO0=
 github.com/chalvern/simplate v0.1.0/go.mod h1:ZLjbRvV4zhj5/aQPJdyYI35fCdGTKeiU9mNbahDy4v4=
 github.com/chalvern/sugar v0.2.0 h1:aVXnAhYawaV+Gp58bBeQnO9hzLm06XXZJeaScZSywhg=
