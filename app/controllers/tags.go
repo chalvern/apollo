@@ -1,10 +1,33 @@
 package controllers
 
 import (
+	"net/http"
+
 	"github.com/chalvern/apollo/app/service"
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
 )
+
+// TagsListHandler 标签列表
+func TagsListHandler(c *gin.Context) {
+	c.Set(PageTitle, "标签列表")
+
+	page := service.QueryPage(c)
+	tags, allPage, err := service.TagsQueryWithContext(c)
+	if err != nil {
+		sugar.Errorf("TagsListHandler-获取 Shares 出错:%s", err.Error())
+		html(c, http.StatusOK, "notify/error.tpl", gin.H{
+			"Timeout": 3,
+		})
+		return
+	}
+
+	html(c, http.StatusOK, "tags/list.tpl", gin.H{
+		"Tags":        tags,
+		"CurrentPage": page,
+		"TotalPage":   allPage,
+	})
+}
 
 // TagInfoHandler 标签信息页面
 func TagInfoHandler(c *gin.Context) {

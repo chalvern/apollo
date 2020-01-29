@@ -5,9 +5,11 @@ import "fmt"
 // Tag 标签
 type Tag struct {
 	Model
-	Name     string `gorm:"unique_index"` // 标签名称
-	ParentID uint   `gorm:"index"`        // 父节点 ID
-	Count    int    `gorm:""`             // 数量
+	Name      string `gorm:"unique_index"` // 标签名称
+	Hierarchy int    `gorm:"default:0"`    // 缩进与阶层
+	Parent    string `gorm:"index"`        // 父标签
+	Desc      string `gorm:"type:text"`    // 描述
+	Count     int    `gorm:""`             // 数量
 }
 
 // QueryBatch 检索一页标签

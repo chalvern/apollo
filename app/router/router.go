@@ -34,6 +34,7 @@ func routerInit() {
 	get("user_detail", "/user/detail", controllers.UserInfoHandler)
 
 	// tag
+	get("tag_list", "/tag/list", controllers.TagsListHandler)
 	get("tag_detail", "/tag/detail", controllers.TagInfoHandler)
 
 	// url_title
