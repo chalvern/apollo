@@ -45,7 +45,7 @@
 					<input type="hidden" value="{{.Share.ID}}" name="share_id">
 					<div class="form-group">
 						<em style="color: red;">* </em>
-						<label for="replay">回复</label> · 
+						<label for="replay">回复</label>
 						<textarea id="replay" name="replay" class="form-control" rows="3" placeholder="回复"></textarea>
 					</div>
 					<button type="submit" class="btn btn-default">回复</button>

@@ -7,6 +7,9 @@
 		</div>
 	</div>
 	<div class="media-body">
+		<div class="title">
+			<a href="{{link `user_detail` `uid` .User.ID}}">{{.User.Nickname}}</a>
+		</div>
 		<div class="reviews">
 			{{str2html (.Reply|markdown)}}
 		</div>

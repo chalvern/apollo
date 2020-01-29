@@ -40,7 +40,7 @@ func CommentNewPost(c *gin.Context) {
 		UserID:  user.ID,
 		Reply:   form.Replay,
 		ShareID: form.ShareID,
-		Number:  share.CommentCount,
+		Number:  share.CommentCount + 1,
 	}
 
 	if err := service.CommentCreate(&comment); err != nil {

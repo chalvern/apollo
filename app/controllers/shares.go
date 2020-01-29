@@ -44,6 +44,7 @@ func ShareDetailGet(c *gin.Context) {
 		"CurrentPage": page,
 		"TotalPage":   allPage,
 		"Comments":    comments,
+		"SideTags":    service.TagsRecommendQuery(),
 	})
 }
 
