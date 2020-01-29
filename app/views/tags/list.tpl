@@ -4,7 +4,7 @@
       <div class="panel-heading index-panel-heading">
         <a href="{{link `home_page`}}">首页</a> | 
         <a href="{{link `tag_list`}}" style="padding: 1px 15px;">所有标签</a>
-        {{if account_manager .Account}}
+        {{if account_manager_authority .Account}}
           | <a href="{{link `tag_new_get`}}">新建标签</a>
         {{end}}
       </div>

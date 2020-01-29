@@ -75,3 +75,8 @@ func ShareClicked(shareID uint) error {
 func ShareStared(shareID uint) error {
 	return shareModel.Star(shareID)
 }
+
+// ShareComment 被回复
+func ShareComment(shareID uint) error {
+	return shareModel.Comment(shareID)
+}

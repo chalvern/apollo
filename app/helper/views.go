@@ -12,8 +12,8 @@ func AddFuncMap() {
 	simplate.AddFuncMap("dataFormat", DataFormatHelper)
 	simplate.AddFuncMap("now_year", NowYear)
 
-	simplate.AddFuncMap("account_normal", AccountNormalHelper)
-	simplate.AddFuncMap("account_manager", AccountManagerHelper)
+	simplate.AddFuncMap("account_normal_authority", AccountNormalHelper)
+	simplate.AddFuncMap("account_manager_authority", AccountManagerHelper)
 
 	simplate.AddFuncMap("account_has_share_edit_authority", AccountHasShareEditAuthority)
 

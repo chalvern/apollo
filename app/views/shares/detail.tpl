@@ -29,7 +29,7 @@
 		<div class="panel-body paginate-bot">
 			{{if .Comments}}
 				{{range .Comments}}
-					{{template "shares/_cell.tpl" . }}
+					{{template "comments/_cell.tpl" . }}
 				{{end}}
 			{{ else }}
 				<p>暂无评论</p>
@@ -37,6 +37,22 @@
 			<ul id="page"></ul>
 		</div>
 	</div>
+	
+	{{if account_normal_authority .Account}}
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form action="{{link `comment_new_post`}}" method="post">
+					<input type="hidden" value="{{.Share.ID}}" name="share_id">
+					<div class="form-group">
+						<em style="color: red;">* </em>
+						<label for="replay">回复</label> · 
+						<textarea id="replay" name="replay" class="form-control" rows="3" placeholder="回复"></textarea>
+					</div>
+					<button type="submit" class="btn btn-default">回复</button>
+				</form>
+			</div>
+		</div>
+	{{end}}
 </div>
 <div class="col-md-3">
 	{{template "home/_sidebar.tpl" . }}

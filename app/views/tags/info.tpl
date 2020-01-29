@@ -10,7 +10,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading index-panel-heading">
 			标签：{{ .CurrentTag }}
-      {{if account_manager .Account}}
+      {{if account_manager_authority .Account}}
         | <a href="{{link `tag_edit_get` `t` .CurrentTag}}">编辑标签</a>
       {{end}}
 		</div>

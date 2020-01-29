@@ -33,8 +33,17 @@ func ShareDetailGet(c *gin.Context) {
 	} else {
 		share.Click(share.ID)
 	}
+
+	page := service.QueryPage(c)
+	comments, allPage, err := service.CommentsQueryWithContext(c, true)
+	if err != nil {
+		sugar.Errorf("ShareDetailGet 获取用户评论出错：%s", err.Error())
+	}
 	htmlOfOk(c, "shares/detail.tpl", gin.H{
-		"Share": &share,
+		"Share":       &share,
+		"CurrentPage": page,
+		"TotalPage":   allPage,
+		"Comments":    comments,
 	})
 }
 
