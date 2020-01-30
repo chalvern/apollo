@@ -1,3 +1,5 @@
 # apollo project
 
-backend of wheresmile.com and jianzhoubian.com.
+查看[中文文档](./README_zh.md)
+
+to be continued.
