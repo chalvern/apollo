@@ -91,6 +91,7 @@ func Run(ctx context.Context) {
 	sugar.Info("Shutdown Server ...")
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	srv.SetKeepAlivesEnabled(false)
 	defer cancel()
 	if err := srv.Shutdown(ctx); err != nil {
 		sugar.Errorf("Web Server Shutdown Error: %v", err)
