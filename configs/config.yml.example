@@ -1,19 +1,37 @@
+# 配置使用的是 yaml 文件格式
+# 这种格式的配置比较优雅，表义也比较准确
+
+# core 下面主要配置一些核心的配置
 core:
+  # env 可以选择三种环境，其中
+  # 1. develop 用于开发，此环境模式下日志会同时打印到文件和标准输出
+  # 2. stage 环境用于预发布，目前和 production 环境类似
+  # 3. production 环境用于正式环境，此环境模式下日志只会打印到文件
   # develop/stage/production
   env: develop
 
+# pubsub 异步任务配置，主要使用的是 github.com/chalvern/gochan 库
 pubsub:
+  # 配置异步执行器的数目，2 表示有两个协程执行异步任务
   gochan_num: 2
+  # 配置每个执行器的任务缓存数，3 表示每个协程执行任务时，可以继续
+  # 向其缓冲区发布任务，直到满 3 个。缓冲区满会导致任务发布变成同步操作
   buffer_num: 3
 
+# jwt 的配置
+# apollo 使用 jwt 进行用户身份的鉴权
 jwt:
   hmac_secret: 123456
 
+# cookie 的配置
 cookie:
+  # tag 表示 cookie 的 key 值
+  # 下面各项类似
   tag: "_t"
   domain: "*"
   secure: false
   http_only: false
+  # expr_hour 表示 cookie 的有效时长，这里以小时记
   expr_hour: 240
 
 # database config (mysql for example)
@@ -23,15 +41,25 @@ database:
   dbname: apollo
   username: root
   password: 123456
+  # 这里的几个参数比较重要，分别表示字符集、时间解析相关（经验）
   args: charset=utf8mb4&parseTime=True&loc=Local
-  max_idle_conns: 20
+  # 最大可打开的连接数，这个受到资源限制的影响动态调整
   max_open_conns: 15
+  # 最大闲置的链接数
+  max_idle_conns: 10
+  # 低版本的 mysql 会需要这个配置，如果是 5.7.x 的 mysql，设置为 false 即可
   row_format_dynamic: false  # for lower version mysql
+  # 是否在 日志 中打印 SQL 语句，建议在开发模式打印，其他环境关闭（否则影响性能）
   log_mod: true
 
+# web 服务相关的一些配置
 webserver:
+  # 监听的地址
   addr: 0.0.0.0:2020
+  # logo 字样
   brand_title: 见周边
+  # 标题后缀
   page_title: 探·见周边
+  # 侧栏的 about 内容
   about_content: 看见生活、品鉴生活、推荐生活。
   
