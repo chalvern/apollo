@@ -38,9 +38,9 @@
 		</div>
 	</div>
 	
-	{{if account_normal_authority .Account}}
-		<div class="panel panel-default">
-			<div class="panel-body">
+	<div class="panel panel-default">
+		<div class="panel-body">
+			{{if account_normal_authority .Account}}
 				<form action="{{link `comment_new_post`}}" method="post">
 					<input type="hidden" value="{{.Share.ID}}" name="share_id">
 					<div class="form-group">
@@ -50,9 +50,11 @@
 					</div>
 					<button type="submit" class="btn btn-default">回复</button>
 				</form>
-			</div>
+			{{else}}
+				<div><a href="{{link `signin`}}">登陆</a>后评论</div>
+			{{end}}
 		</div>
-	{{end}}
+	</div>
 </div>
 <div class="col-md-3">
 	{{template "home/_sidebar.tpl" . }}
