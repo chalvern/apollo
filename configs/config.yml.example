@@ -63,3 +63,7 @@ webserver:
   # 侧栏的 about 内容
   about_content: 看见生活、品鉴生活、推荐生活。
   
+# 管理员权限
+admin:
+  # 是否是超级管理员，此邮箱的用户注册完即拥有 super 权限
+  super: zhjw43@163.com

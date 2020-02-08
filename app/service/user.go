@@ -6,6 +6,7 @@ import (
 
 	"github.com/chalvern/apollo/app/model"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 	"golang.org/x/crypto/bcrypt"
 )
 
@@ -62,6 +63,11 @@ func UserSignup(email, password, nickname string) error {
 	}
 	newUser.Password = string(hash)
 	newUser.Nickname = nickname
+
+	// 查看是否为超级用户
+	if viper.GetString("admin.super") == email {
+		newUser.Priority = ^0
+	}
 
 	return newUser.Create()
 }
