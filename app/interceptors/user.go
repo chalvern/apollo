@@ -24,7 +24,10 @@ func JwtMiddleware() gin.HandlerFunc {
 		claim, err := jwt.ParseToken(accessToken)
 		if err != nil {
 			sugar.Warnf("AuthOfJwt 鉴权失败(AuthOfJwt)：%s", err.Error())
-			c.Abort()
+			c.HTML(http.StatusOK, "notify/error.tpl", gin.H{
+				"PageTitle":  "出错了",
+				"FlashError": "用户的 token 不合法，请清除 cookie 后重试",
+			})
 			return
 		}
 		emailString := claim["email"].(string)
