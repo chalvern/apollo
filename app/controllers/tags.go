@@ -48,15 +48,20 @@ func TagInfoHandler(c *gin.Context) {
 	argArray[0] = argS
 	shares, allPage, err := service.SharesQueryWithContext(c, true, argArray...)
 	if err != nil {
-		sugar.Errorf("UserInfo-获取 Shares 出错:%s", err.Error())
+		sugar.Errorf("TagInfoHandler-获取 Shares 出错:%s", err.Error())
 		return
 	}
+	tag, err := service.TagQueryByName(tagName)
+	if err != nil {
+		sugar.Warnf("TagInfoHandler 获取的 tagName=%s 出错: %v", tagName, err)
+	}
 	htmlOfOk(c, "tags/info.tpl", gin.H{
-		"CurrentTag":  tagName,
-		"Shares":      shares,
-		"CurrentPage": page,
-		"TotalPage":   allPage,
-		"SideTags":    service.TagsRecommendQuery(),
+		"CurrentTagName": tagName,
+		"CurrentTag":     tag,
+		"Shares":         shares,
+		"CurrentPage":    page,
+		"TotalPage":      allPage,
+		"SideTags":       service.TagsRecommendQuery(),
 	})
 }
 

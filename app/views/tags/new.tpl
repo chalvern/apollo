@@ -23,7 +23,7 @@
           </div>
           <div class="form-group">
             <label for="desc">描述</label>
-            <textarea id="desc" name="desc" class="form-control" rows="3"
+            <textarea id="desc" name="desc" class="form-control" rows="10"
                 placeholder="描述"></textarea>
           </div>
           <input type="submit" class="btn btn-default" value="提交"></input>
