@@ -60,6 +60,7 @@ func mainJob(c *cli.Context) error {
 	ctx, cancel := context.WithCancel(context.Background())
 
 	// initializer
+	initializer.InitJwt()
 	initializer.InitSugarWithPath("log/")
 	initializer.InitMysql(ctx)
 	initializer.InitCaptcha(ctx)

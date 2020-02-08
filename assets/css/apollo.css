@@ -110,3 +110,11 @@ body {
 .detail-status {
   font-size: 14px;
 }
+
+/* 评阅自然段 */
+.reviews p {
+  margin: 0;
+}
+
+
+

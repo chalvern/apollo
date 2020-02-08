@@ -9,6 +9,7 @@
 <div class="col-md-9 mt-3"> 
   <div class="panel panel-default">
     <div class="panel-heading index-panel-heading">
+			<a href="{{link `home_page` `t` `0`}}" style="padding: 1px 15px;">全部</a> | 
       标签：{{ .CurrentTagName }}
       {{if account_manager_authority .Account}}
         | <a href="{{link `tag_edit_get` `t` .CurrentTagName}}">编辑标签</a>
@@ -16,11 +17,20 @@
     </div>
     <div class="panel-body paginate-bot">
       {{ if .CurrentTag }}
-        <div class="reviews">
-          {{str2html ((str_limit_length .CurrentTag.Desc 400)|markdown)}}
+        <div class="reviews" style="">
+          {{if eq .CurrentPage 1}}
+            <!-- 第一页展示全文，其他页展示前 100 个字符 -->
+            {{str2html ((str_limit_length .CurrentTag.Desc 2000)|markdown)}}
+          {{else}}
+            {{str2html ((str_limit_length .CurrentTag.Desc 100)|markdown)}}
+          {{end}}
         </div>
       {{end}}
     </div>
+  </div>
+  
+  <div class="status pull-right">
+    第 {{.CurrentPage}}/{{.TotalPage}} 页
   </div>
   <div class="panel panel-default">
     <div class="panel-body paginate-bot">
