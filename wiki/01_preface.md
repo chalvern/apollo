@@ -23,7 +23,15 @@
 
 就我个人的经验来看，做囫囵的项目最能考验一个人的技术造诣，也最能使一个人成长。在 apollo 项目过程中无疑我会获得我自己的成长。
 
+## 使用到的 go 的第三方库
 
+包含 web 框架（gin）、配置（viper)、数据迁移（gorm）、日志（uber/zap）等，可以作为学习 Go 语言的资料进行学习。
+
+* web——[gin](https://github.com/gin-gonic/gin)
+* ORM——[gorm](https://github.com/jinzhu/gorm)
+* 日志——[uber/zap](https://github.com/uber-go/zap)/[sugar](https://github.com/chalvern/sugar)
+* 配置——[viper](https://github.com/spf13/viper)
+* 其他可参考 [go.mod](../go.mod) 文件
 
 
 
