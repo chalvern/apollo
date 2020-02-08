@@ -14,6 +14,7 @@ func AddFuncMap() {
 
 	simplate.AddFuncMap("account_normal_authority", AccountNormalHelper)
 	simplate.AddFuncMap("account_manager_authority", AccountManagerHelper)
+	simplate.AddFuncMap("account_super_authority", AccountSuperHelper)
 
 	simplate.AddFuncMap("account_has_share_edit_authority", AccountHasShareEditAuthority)
 

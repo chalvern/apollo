@@ -12,6 +12,11 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse header-navbar">
         <ul class="nav navbar-nav navbar-right">
+          {{if .Account|account_super_authority}}
+            <li>
+              <a href="{{link `admin_home_page`}}">管理页</a>
+            </li>
+          {{end}}
           <li>
             <a href="{{link `home_page`}}">首页</a>
           </li>

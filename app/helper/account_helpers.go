@@ -5,21 +5,24 @@ import "github.com/chalvern/apollo/app/model"
 // AccountNormalHelper 用户鉴权
 // 用户拥有基本的权限（用户初始化后 priority=0，不具有基本权限）
 func AccountNormalHelper(u *model.User) bool {
-	if u == nil {
-		return false
-	}
-	if u.Priority > 0 {
-		return true
-	}
-	return false
+	return accountPriorityManager(u, model.UserPriorityValid)
 }
 
 // AccountManagerHelper 用户具有 管理者（manager）权限
 func AccountManagerHelper(u *model.User) bool {
+	return accountPriorityManager(u, model.UserPriorityManager)
+}
+
+// AccountSuperHelper 用户具有超级管理员（super）权限
+func AccountSuperHelper(u *model.User) bool {
+	return accountPriorityManager(u, model.UserPrioritySuper)
+}
+
+func accountPriorityManager(u *model.User, priority int) bool {
 	if u == nil {
 		return false
 	}
-	if u.Priority&model.UserPriorityManager > 0 {
+	if u.Priority&priority > 0 {
 		return true
 	}
 	return false

@@ -12,6 +12,7 @@ const (
 	UserPriorityAdmin   = 1 << 10 // 管理员
 	UserPrioritySuper   = 1 << 11 // 超级管理员
 
+	UserPriorityValid   = ^0 // 正常用户，全 1
 	UserPriorityManager = UserPriorityAdmin | UserPrioritySuper
 )
 

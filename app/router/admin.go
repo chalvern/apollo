@@ -7,6 +7,8 @@ import (
 )
 
 func adminRouterInit() {
+	get("admin_home_page", "/admin",
+		i.UserPriorityMiddleware(model.UserPrioritySuper), admin.HomeIndex)
 	get("admin_account_list", "/admin/account/list",
 		i.UserPriorityMiddleware(model.UserPrioritySuper), admin.AccountsList)
 	get("admin_account_edit_get", "/admin/account/edit",
