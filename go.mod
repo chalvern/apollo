@@ -21,6 +21,7 @@ require (
 	github.com/urfave/cli v1.22.2
 	go.uber.org/zap v1.10.0
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
+	gopkg.in/go-playground/assert.v1 v1.2.1
 	gopkg.in/go-playground/validator.v9 v9.29.1
 	gopkg.in/gormigrate.v1 v1.6.0
 )

@@ -31,5 +31,7 @@ func FirstCharacterOfHelper(name string) string {
 	if len(name) == 0 {
 		return "U"
 	}
-	return name[:1]
+
+	rawRune := []rune(name)
+	return string(rawRune[:1])
 }
