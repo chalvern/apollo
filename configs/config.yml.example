@@ -9,6 +9,10 @@ core:
   # 3. production 环境用于正式环境，此环境模式下日志只会打印到文件
   # develop/stage/production
   env: develop
+  site:
+    host: jianzhoubian.com
+    name: 见周边
+
 
 # pubsub 异步任务配置，主要使用的是 github.com/chalvern/gochan 库
 pubsub:
@@ -28,18 +32,25 @@ cookie:
   # tag 表示 cookie 的 key 值
   # 下面各项类似
   tag: "_t"
-  domain: "*"
+  domain: "jianzhoubian.com"
   secure: false
   http_only: false
   # expr_hour 表示 cookie 的有效时长，这里以小时记
   expr_hour: 240
 
+# mailer
 mailer:
-  address: jianzhoubian@163.com
-  alias_name: 见周边
-  password: 123456a
-  host: smtp.163.com
-  port: 465
+  email:
+    address: jianzhoubian@163.com
+    alias_name: 见周边
+    password: 123456a
+    host: smtp.163.com
+    port: 465
+  # hermes 邮件模板里的一些配置
+  hermes:
+    header_logo: http://www.jianzhoubian.com/static/favicon.ico
+
+
 
 # database config (mysql for example)
 database:
