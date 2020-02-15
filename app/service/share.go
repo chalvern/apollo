@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/chalvern/apollo/app/helper"
 	"github.com/chalvern/apollo/app/model"
 	"github.com/gin-gonic/gin"
 )
@@ -50,16 +51,23 @@ func ShareCreate(share *model.Share) error {
 	if share.UserID == 0 {
 		return fmt.Errorf("创建分享必须设置用户 ID")
 	}
+	// 标题限制 100 个字符
+	share.Title = helper.StringLimitLengthHelper(share.Title, model.ShareTitleMaxLen-3)
 	return share.Create()
 }
 
 // ShareUpdates 更新分享
+// 传入的 share 的 UserID 必须带进来用以判定权限
 func ShareUpdates(share *model.Share, user *model.User) error {
 	if share.ID == 0 {
 		return fmt.Errorf("更新分享必须是已存在的分享内容")
 	}
+	// 标题限制 100 个字符
+	share.Title = helper.StringLimitLengthHelper(share.Title, model.ShareTitleMaxLen-3)
+
 	// 只能本人或者管理员有修改分享的权限
-	if share.UserID == user.ID || user.Priority&model.UserPriorityManager != 0 {
+	if (share.UserID != 0 && share.UserID == user.ID) ||
+		user.Priority&model.UserPriorityManager != 0 {
 		return share.Update()
 	}
 

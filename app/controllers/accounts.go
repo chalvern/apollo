@@ -80,9 +80,9 @@ func SignupGet(c *gin.Context) {
 func SignUpPost(c *gin.Context) {
 	c.Set(PageTitle, "注册")
 	form := struct {
-		Email     string `form:"email" binding:"required,email,lenlte=50"`
-		Password  string `form:"password" binding:"required,lengte=8"`
-		NickName  string `form:"nick_name" binding:"required,lengte=1"`
+		Email     string `form:"email" binding:"required,email,lenlte=100"`
+		Password  string `form:"password" binding:"required,lengte=8,lenlte=128"`
+		NickName  string `form:"nick_name" binding:"required,lengte=1,lenlte=50"`
 		Password2 string `form:"password2" binding:"required,gtefield=Password,ltefield=Password"`
 		CaptchaID string `form:"captcha_id" binding:"required"`
 		Captcha   string `form:"captcha" binding:"required"`

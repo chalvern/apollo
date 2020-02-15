@@ -1,12 +1,15 @@
 package model
 
-import "github.com/jinzhu/gorm"
+import (
+	"fmt"
 
-import "fmt"
+	"github.com/jinzhu/gorm"
+)
 
 // 分享的状态
 const (
 	ShareStatusCommon = 0
+	ShareTitleMaxLen  = 100
 )
 
 // Share 分享

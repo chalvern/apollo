@@ -51,7 +51,7 @@
 					<button type="submit" class="btn btn-default">回复</button>
 				</form>
 			{{else}}
-				<div><a href="{{link `signin`}}">登陆</a>后评论</div>
+				<div><a href="{{link `signin`}}">未登陆</a>或尚未认证授权</div>
 			{{end}}
 		</div>
 	</div>

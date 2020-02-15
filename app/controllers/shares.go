@@ -138,7 +138,7 @@ func ShareEditGet(c *gin.Context) {
 	}
 	user := c.MustGet("user").(*model.User)
 	// 只能本人或者管理员有修改分享的权限
-	if user.ID != share.UserID || !helper.AccountManagerHelper(user) {
+	if user.ID != share.UserID && !helper.AccountManagerHelper(user) {
 		sugar.Warnf("ShareEditPost 用户 %d 没有修改 id=%v 的权限", user.ID, c.Query("id"))
 		html(c, http.StatusOK, "notify/error.tpl", gin.H{
 			"Info": "没有权限修改此分享内容",
@@ -165,7 +165,7 @@ func ShareEditPost(c *gin.Context) {
 	}
 	user := c.MustGet("user").(*model.User)
 	// 只能本人或者管理员有修改分享的权限
-	if user.ID != shareOld.UserID || !helper.AccountManagerHelper(user) {
+	if user.ID != shareOld.UserID && !helper.AccountManagerHelper(user) {
 		sugar.Warnf("ShareEditPost 用户 %d 没有修改 id=%v 的权限", user.ID, c.Query("id"))
 		html(c, http.StatusOK, "notify/error.tpl", gin.H{
 			"Info": "没有权限修改此分享内容",
@@ -187,12 +187,14 @@ func ShareEditPost(c *gin.Context) {
 		return
 	}
 
-	share := model.Share{}
+	share := model.Share{
+		UserID: user.ID,
+		URL:    form.URL,
+		Title:  form.Title,
+		Review: form.Review,
+		Tag:    form.Tag,
+	}
 	share.ID = shareOld.ID
-	share.URL = form.URL
-	share.Title = form.Title
-	share.Review = form.Review
-	share.Tag = form.Tag
 
 	if err = service.ShareUpdates(&share, user); err != nil {
 		sugar.Errorf("ShareEditPost Update Error: %s", err.Error())
