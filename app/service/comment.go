@@ -46,7 +46,7 @@ func CommentUpdates(comment *model.Comment, user *model.User) error {
 		return fmt.Errorf("更新必须是已存在的分享内容")
 	}
 	// 只能本人或者管理员有修改分享的权限
-	if comment.UserID == user.ID || user.Priority&model.UserPriorityManager != 0 {
+	if comment.UserID == user.ID || user.Priority&model.UserPriorityManagerMask != 0 {
 		return comment.Update()
 	}
 

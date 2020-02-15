@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/chalvern/apollo/app/mailer"
@@ -120,7 +121,7 @@ func SignUpPost(c *gin.Context) {
 	}
 
 	htmlOfOk(c, "notify/success.tpl", gin.H{
-		"Info":         "注册成功 😆😆😆",
+		"Info":         fmt.Errorf("注册成功 😆😆😆，验证邮件已发送至 %s", form.Email),
 		"Timeout":      3,
 		"RedirectURL":  "/signin",
 		"RedirectName": "登陆页",
@@ -138,5 +139,33 @@ func SignOut(c *gin.Context) {
 		"Timeout":      3,
 		"RedirectURL":  "/",
 		"RedirectName": "首页",
+	})
+}
+
+// AccountValidEmailHandler 验证邮箱
+func AccountValidEmailHandler(c *gin.Context) {
+	c.Set(PageTitle, "邮箱验证")
+	mail := c.Query("mail")
+	token := c.Query("token")
+	if mail == "" || token == "" {
+		html(c, http.StatusOK, "notify/error.tpl", gin.H{
+			"FlashError": "参数无效",
+		})
+		return
+	}
+	err := service.UserValidEmail(mail, token)
+	if err != nil {
+		sugar.Warnf("用户校验邮箱出错：%s", err.Error)
+		html(c, http.StatusOK, "notify/error.tpl", gin.H{
+			"FlashError": "邮箱未注册或 token 已过期",
+		})
+		return
+	}
+
+	html(c, http.StatusOK, "notify/success.tpl", gin.H{
+		"Info":         "验证成功 😆😆😆",
+		"Timeout":      5,
+		"RedirectURL":  "/signin",
+		"RedirectName": "登陆页",
 	})
 }

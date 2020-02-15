@@ -80,5 +80,28 @@ func UserUpdates(user *model.User) error {
 	if user.ID == 0 {
 		return fmt.Errorf("更新分享必须是已存在的用户")
 	}
+	return userUpdates(user)
+}
+
+// userUpdates 更新用户
+func userUpdates(user *model.User) error {
 	return user.Update()
+}
+
+// UserValidEmail 用户验证邮箱
+func UserValidEmail(email, token string) error {
+	user, err := userModel.FindByEmail(email)
+	if err != nil {
+		return err
+	}
+	if user.EmailValidToken != token {
+		return fmt.Errorf("传入的 token 无效")
+	}
+	if user.EmailVarified {
+		return fmt.Errorf("用户邮箱 %s 已认证", email)
+	}
+	// 到这里说明用户身份正确
+	user.EmailVarified = true
+	user.Priority = user.Priority | model.UserPriorityCommon
+	return UserUpdates(&user)
 }

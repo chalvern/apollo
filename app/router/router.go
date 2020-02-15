@@ -30,6 +30,7 @@ func routerInit() {
 	get("signin", "/signin", i.UserMustNotExistMiddleware(), controllers.SigninGet)
 	post("signin_post", "/signin", i.UserMustNotExistMiddleware(), controllers.SignInPost)
 	get("signout", "/signout", controllers.SignOut)
+	get("valid_email", "account/valid_email", controllers.AccountValidEmailHandler)
 
 	// user
 	get("user_detail", "/user/detail", controllers.UserInfoHandler)
@@ -37,10 +38,10 @@ func routerInit() {
 	// tag
 	get("tag_list", "/tag/list", controllers.TagsListHandler)
 	get("tag_detail", "/tag/detail", controllers.TagInfoHandler)
-	get("tag_new_get", "/tag/new", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagNewGet)
-	post("tag_new_post", "/tag/new", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagNewPost)
-	get("tag_edit_get", "/tag/edit", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagEditGet)
-	post("tag_edit_post", "/tag/edit", i.UserPriorityMiddleware(model.UserPriorityManager), controllers.TagEditPost)
+	get("tag_new_get", "/tag/new", i.UserPriorityMiddleware(model.UserPriorityManagerMask), controllers.TagNewGet)
+	post("tag_new_post", "/tag/new", i.UserPriorityMiddleware(model.UserPriorityManagerMask), controllers.TagNewPost)
+	get("tag_edit_get", "/tag/edit", i.UserPriorityMiddleware(model.UserPriorityManagerMask), controllers.TagEditGet)
+	post("tag_edit_post", "/tag/edit", i.UserPriorityMiddleware(model.UserPriorityManagerMask), controllers.TagEditPost)
 
 	// url_title
 	get("url_title", "/url/title", controllers.QueryTitleFromURL)

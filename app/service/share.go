@@ -67,7 +67,7 @@ func ShareUpdates(share *model.Share, user *model.User) error {
 
 	// 只能本人或者管理员有修改分享的权限
 	if (share.UserID != 0 && share.UserID == user.ID) ||
-		user.Priority&model.UserPriorityManager != 0 {
+		user.Priority&model.UserPriorityManagerMask != 0 {
 		return share.Update()
 	}
 

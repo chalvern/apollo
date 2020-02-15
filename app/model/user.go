@@ -12,8 +12,8 @@ const (
 	UserPriorityAdmin   = 1 << 10 // 管理员
 	UserPrioritySuper   = 1 << 11 // 超级管理员
 
-	UserPriorityValid   = ^0 // 正常用户，全 1
-	UserPriorityManager = UserPriorityAdmin | UserPrioritySuper
+	UserPriorityAllValidMask = ^0 // 超级超级用户，全 1
+	UserPriorityManagerMask  = UserPriorityAdmin | UserPrioritySuper
 )
 
 // User 存放用户信息
