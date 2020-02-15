@@ -10,7 +10,7 @@ core:
   # develop/stage/production
   env: develop
   site:
-    host: jianzhoubian.com
+    host: localhost:2020
     name: 见周边
 
 
@@ -32,7 +32,7 @@ cookie:
   # tag 表示 cookie 的 key 值
   # 下面各项类似
   tag: "_t"
-  domain: "jianzhoubian.com"
+  domain: "localhost"
   secure: false
   http_only: false
   # expr_hour 表示 cookie 的有效时长，这里以小时记

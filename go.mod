@@ -12,6 +12,7 @@ require (
 	github.com/gin-contrib/zap v0.0.0-20191128031730-d12829f8f61b
 	github.com/gin-gonic/gin v1.5.0
 	github.com/go-resty/resty/v2 v2.1.0
+	github.com/gofrs/uuid v3.2.0+incompatible
 	github.com/jinzhu/gorm v1.9.2
 	github.com/matcornic/hermes/v2 v2.1.0
 	github.com/prometheus/client_golang v0.9.3

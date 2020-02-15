@@ -25,7 +25,8 @@ type User struct {
 
 	Nickname string `gorm:"type:varchar(50)" json:"nickname"` // 昵称
 
-	EmailVarified bool `gorm:"" json:"-"` // 邮件已认证
+	EmailValidToken string `gorm:"type:varchar(50)" json:"-"` // 邮件认证的token
+	EmailVarified   bool   `gorm:"" json:"-"`                 // 邮件已认证
 
 	ResetPasswordKey string     `gorm:"type:varchar(128)" json:"-"` // 重置密码所需要的key
 	BannedTime       *time.Time `gorm:""`                           // 被拉黑到什么时候

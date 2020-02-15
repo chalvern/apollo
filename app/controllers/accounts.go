@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/chalvern/apollo/app/mailer"
 	"github.com/chalvern/apollo/app/service"
 	"github.com/chalvern/apollo/configs/initializer"
 	"github.com/chalvern/apollo/tools/jwt"
@@ -104,11 +105,18 @@ func SignUpPost(c *gin.Context) {
 		return
 	}
 
-	if err := service.UserSignup(form.Email, form.Password, form.NickName); err != nil {
+	newUser, err := service.UserSignup(form.Email, form.Password, form.NickName)
+	if err != nil {
 		html(c, http.StatusBadRequest, "account/signup.tpl", gin.H{
 			FlashError: "创建用户失败，邮箱已注册",
 		})
 		return
+	}
+
+	// 发送验证邮件
+	err = mailer.AccountValidEmail(form.Email, form.NickName, newUser.EmailValidToken)
+	if err != nil {
+		sugar.Warnf("发送验证邮件失败，email: %s", form.Email)
 	}
 
 	htmlOfOk(c, "notify/success.tpl", gin.H{
