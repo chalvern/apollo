@@ -9,6 +9,7 @@ import (
 
 	"github.com/chalvern/apollo/app/controllers"
 	"github.com/chalvern/apollo/app/helper"
+	"github.com/chalvern/apollo/app/mailer"
 	"github.com/chalvern/apollo/app/model"
 	"github.com/chalvern/apollo/app/pubsub"
 	"github.com/chalvern/apollo/app/router"
@@ -38,6 +39,7 @@ func Run(ctx context.Context) {
 	model.Init()
 	controllers.Init()
 	pubsub.Init()
+	mailer.Init()
 
 	// 2. initial gin
 	// 2. 初始化 gin

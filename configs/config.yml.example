@@ -34,6 +34,13 @@ cookie:
   # expr_hour 表示 cookie 的有效时长，这里以小时记
   expr_hour: 240
 
+mailer:
+  address: jianzhoubian@163.com
+  alias_name: 见周边
+  password: 123456a
+  host: smtp.163.com
+  port: 465
+
 # database config (mysql for example)
 database:
   host: 127.0.0.1
