@@ -87,6 +87,6 @@ func (s *Share) Comment(shareID uint) error {
 
 // AggregateTagCount 某个 Tag 有多少个 share
 func (s *Share) AggregateTagCount(tagName string) (count int, err error) {
-	err = mydb.Model(s).Where("tag=?", tagName).Count(&count).Error
+	err = mydb.Model(Share{}).Where("tag=?", tagName).Count(&count).Error
 	return
 }
