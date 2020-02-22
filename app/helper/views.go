@@ -22,6 +22,9 @@ func AddFuncMap() {
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
 	simplate.AddFuncMap("about_content", PageSideAboutHelper)
 
+	simplate.AddFuncMap("URLPathof", URLPathOfHelper)
+	simplate.AddFuncMap("link", URLPathOfHelper)
+
 	simplate.AddFuncMap("str_limit_length", StringLimitLengthHelper)
 	simplate.AddFuncMap("markdown", MarkdownHelper)
 	simplate.AddFuncMap("str2html", Str2html)

@@ -1,6 +1,7 @@
 package router
 
 import (
+	"github.com/chalvern/apollo/app/helper"
 	"github.com/chalvern/apollo/app/interceptors"
 	"github.com/chalvern/sugar"
 	"github.com/gin-gonic/gin"
@@ -15,10 +16,19 @@ type Config struct {
 }
 
 type routerConfigs []Config
+type routerConfigsMap map[string]Config
+
+func (rcm routerConfigsMap) GetAbsoluteURLOf(name string) string {
+	config, ok := rcm[name]
+	if !ok {
+		return "/"
+	}
+	return config.AbsolutePath
+}
 
 var (
 	routerConfigSlice = make([]Config, 0, 20)
-	routerConfigMap   = make(map[string]Config)
+	routerConfigMap   = make(routerConfigsMap)
 )
 
 // get method
@@ -65,7 +75,9 @@ func Init(r *gin.Engine) *gin.Engine {
 
 	routerInit()
 	adminRouterInit()
-	simplateFuncRegistor()
+
+	// 把 routerConfigMap 反向注入到 helper
+	helper.SetRouterConfig(routerConfigMap)
 
 	for _, rc := range routerConfigSlice {
 		routerConfigMap[rc.Name] = rc
@@ -80,5 +92,6 @@ func Init(r *gin.Engine) *gin.Engine {
 			sugar.Fatalf("方法未注册: %v", rc)
 		}
 	}
+
 	return r
 }
