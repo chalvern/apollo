@@ -1,6 +1,9 @@
 package model
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // Tag 标签
 type Tag struct {
@@ -9,7 +12,7 @@ type Tag struct {
 	Hierarchy int    `gorm:"default:0"`    // 缩进与阶层
 	Parent    string `gorm:"index"`        // 父标签
 	Desc      string `gorm:"type:text"`    // 描述
-	Count     int    `gorm:""`             // 数量
+	Count     int    `gorm:"default:0"`    // 数量
 }
 
 // QueryBatch 检索一页标签
@@ -34,7 +37,7 @@ func (t *Tag) QueryByName(name string) (Tag, error) {
 
 // Create 创建标签
 func (t *Tag) Create() error {
-	if len(t.Name) == 0 {
+	if len(strings.TrimSpace(t.Name)) == 0 {
 		return fmt.Errorf("标签不能为空字符串")
 	}
 	return mydb.Save(t).Error
@@ -44,6 +47,9 @@ func (t *Tag) Create() error {
 func (t *Tag) Update() error {
 	if t.ID == 0 {
 		return fmt.Errorf("Tag 更新必须设置 ID")
+	}
+	if len(strings.TrimSpace(t.Name)) == 0 {
+		return fmt.Errorf("标签不能为空字符串")
 	}
 	return mydb.Model(t).Updates(t).Error
 }
