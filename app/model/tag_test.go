@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/chalvern/apollo/configs/initializer"
@@ -30,21 +29,11 @@ func TestTagCreate(t *testing.T) {
 	})
 }
 
-func ftCreateOneTag() *Tag {
-	tag := &Tag{
-		Name:  "博客",
-		Desc:  "个人博客",
-		Count: 0,
-	}
-	tag.Create()
-	return tag
-}
-
 func TestTagUpdate(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	tag := ftCreateOneTag()
+	tag := FtCreateOneTag()
 	tag.Name = "Blog"
 	err := tag.Update()
 	assert.Nil(t, err)
@@ -54,7 +43,7 @@ func TestTagQueryByName(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	tag := ftCreateOneTag()
+	tag := FtCreateOneTag()
 	tag2, err := tag.QueryByName("博客")
 	assert.Nil(t, err)
 	assert.NotEqual(t, 0, tag2.ID)
@@ -63,27 +52,14 @@ func TestTagQueryByName(t *testing.T) {
 	assert.NotNil(t, err)
 }
 
-func ftCreateSomeTags(num int) (tags []Tag) {
-	for i := 0; i < num; i++ {
-		tag := &Tag{
-			Name:  fmt.Sprintf("博客%d", i),
-			Desc:  "个人博客",
-			Count: 0,
-		}
-		tag.Create()
-		tags = append(tags, *tag)
-	}
-	return tags
-}
-
 func TestTag(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
 	num := 10
-	ftCreateSomeTags(num)
+	FtCreateSomeTags(num)
 
-	tag := ftCreateOneTag()
+	tag := FtCreateOneTag()
 	tags1, total, err := tag.QueryBatch(0, 10)
 	assert.Nil(t, err)
 	assert.Equal(t, num+1, total)

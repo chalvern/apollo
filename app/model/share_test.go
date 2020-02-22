@@ -22,23 +22,11 @@ func TestShareCreate(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-func ftCreateOneShare() *Share {
-	user := ftCreateOneUser()
-	s := &Share{
-		URL:    "https://jingwei.link",
-		Title:  "敬维",
-		Review: "A blog",
-		Tag:    "博客",
-		UserID: user.ID,
-	}
-	s.Create()
-	return s
-}
 func TestShareUpdate(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	s := ftCreateOneShare()
+	s := FtCreateOneShare()
 	s.Review = "A self-blog"
 	err := s.Update()
 	assert.Nil(t, err)
@@ -48,7 +36,7 @@ func TestShareClick(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	s := ftCreateOneShare()
+	s := FtCreateOneShare()
 	assert.Equal(t, 0, s.ClickCount)
 	err := s.Click(s.ID)
 	assert.Nil(t, err)
@@ -65,7 +53,7 @@ func TestShareStar(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	s := ftCreateOneShare()
+	s := FtCreateOneShare()
 	err := s.Star(s.ID)
 	assert.Nil(t, err)
 
@@ -78,7 +66,7 @@ func TestShareComment(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	s := ftCreateOneShare()
+	s := FtCreateOneShare()
 	err := s.Comment(s.ID)
 	assert.Nil(t, err)
 
@@ -110,10 +98,10 @@ func TestShareQueryBatch(t *testing.T) {
 
 	num := 10
 	for i := 0; i < num; i++ {
-		ftCreateOneShare()
+		FtCreateOneShare()
 	}
 
-	s := ftCreateOneShare()
+	s := FtCreateOneShare()
 
 	shares, total, err := s.QueryBatch(0, 10, true)
 	assert.Nil(t, err)

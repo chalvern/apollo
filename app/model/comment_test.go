@@ -16,21 +16,11 @@ func TestCommentCreate(t *testing.T) {
 	assert.Nil(t, err)
 }
 
-// for test
-func ftCreateOneComment() *Comment {
-	comment := &Comment{
-		UserID: 1,
-		Reply:  "Boring",
-	}
-	comment.Create()
-	return comment
-}
-
 func TestCommentUpdate(t *testing.T) {
 	mydb = initializer.DB.Begin()
 	defer mydb.Rollback()
 
-	comment := ftCreateOneComment()
+	comment := FtCreateOneComment()
 	comment.Reply = "so boring"
 	err := comment.Update()
 	assert.Nil(t, err)

@@ -26,6 +26,11 @@ func Init() {
 	logger = sugar.NewLoggerOf("db")
 }
 
+// SetMyDB 设置 db
+func SetMyDB(db *gorm.DB) {
+	mydb = db
+}
+
 // dbArgs 处理变量函数
 func dbArgs(db *gorm.DB, args ...interface{}) *gorm.DB {
 	if len(args) >= 2 {
