@@ -47,7 +47,7 @@ func TestMain(m *testing.M) {
 
 	_, file, _, _ := runtime.Caller(0)
 	// load template，在配置路由时会初始化一些模板函数，因此放 router 后面
-	simplate.SetViewsPath(path.Join(path.Dir(file), "views"))
+	simplate.SetViewsPath(path.Join(path.Dir(file), "..", "views"))
 	simplate.SetLayoutFile("layout/default.html")
 	// 添加模板函数
 	helper.AddFuncMap()
