@@ -10,10 +10,14 @@
       </div>
       <div class="panel-body paginate-bot">
         {{range .Tags}}
+            {{if (eq .Hierarchy 0)}}
+              <hr>
+            {{end}}
             <a href="{{link `tag_detail` `t` .Name}}" class="btn btn-default share-tag">
               {{.Name}} ({{.Count}})
             </a>
         {{end}}
+        <hr>
       </div>
       </div>
   </div>
