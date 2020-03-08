@@ -9,8 +9,10 @@ import (
 func AddFuncMap() {
 
 	// 全局
-	simplate.AddFuncMap("dataFormat", DataFormatHelper)
 	simplate.AddFuncMap("now_year", NowYear)
+	simplate.AddFuncMap("year_month_str", MonthYearFormatHelper)
+	simplate.AddFuncMap("year_date_str", DateYearFormatHelper)
+	simplate.AddFuncMap("time_internal_desc", TimeInternalDesc)
 
 	simplate.AddFuncMap("account_normal_authority", AccountNormalHelper)
 	simplate.AddFuncMap("account_manager_authority", AccountManagerHelper)
@@ -18,7 +20,7 @@ func AddFuncMap() {
 
 	simplate.AddFuncMap("account_has_share_edit_authority", AccountHasShareEditAuthority)
 
-	simplate.AddFuncMap("pageTitle", PageTitleHelper)
+	simplate.AddFuncMap("page_title", PageTitleHelper)
 	simplate.AddFuncMap("brand_title", BrandTitleHelper)
 	simplate.AddFuncMap("about_content", PageSideAboutHelper)
 

@@ -17,7 +17,7 @@
 			评述：{{str_limit_length .Review 100}}
 		</div>
 		<p class="gray">
-			推荐自 <a href="{{link `user_detail` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
+			{{year_month_str .CreatedAt}} · 推荐自 <a href="{{link `user_detail` `uid` .User.ID}}">{{.User.Nickname}}</a> · 
 			<a href="{{link `tag_detail` `t` .Tag}}" class="index-share-tag">{{.Tag}}</a>
 		</p>
 	</div>
