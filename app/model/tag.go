@@ -48,8 +48,5 @@ func (t *Tag) Update() error {
 	if t.ID == 0 {
 		return fmt.Errorf("Tag 更新必须设置 ID")
 	}
-	if len(strings.TrimSpace(t.Name)) == 0 {
-		return fmt.Errorf("标签不能为空字符串")
-	}
 	return mydb.Model(t).Updates(t).Error
 }
