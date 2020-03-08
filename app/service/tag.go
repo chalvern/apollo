@@ -2,6 +2,7 @@ package service
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/chalvern/apollo/app/model"
@@ -77,4 +78,44 @@ func TagUpdateCount(tagName string) error {
 	}
 	tagNew.ID = tag.ID
 	return tagNew.Update()
+}
+
+// TagClassifyA 把标签按照一定规则分类排序
+func TagClassifyA(sourceTags []model.Tag) []model.Tag {
+	unsortedTags := []model.Tag{}
+	tagsMap := make(map[string][]model.Tag)
+	familyKeys := []string{}
+	for _, tag := range sourceTags {
+		// 检出第一级标签
+		if tag.Hierarchy == 0 && tag.Parent == "" {
+			namedTagSlice, ok := tagsMap[tag.Name]
+			if !ok {
+				namedTagSlice = []model.Tag{}
+				familyKeys = append(familyKeys, tag.Name)
+			}
+			tagsMap[tag.Name] = append(namedTagSlice, tag)
+		} else {
+			unsortedTags = append(unsortedTags, tag)
+		}
+	}
+	// 把未分类的标签找到合适的 family 进行处理
+	for _, tag := range unsortedTags {
+		if tag.Parent == "" {
+			continue
+		}
+		family, ok := tagsMap[tag.Parent]
+		if ok {
+			tagsMap[tag.Parent] = append(family, tag)
+		}
+	}
+
+	// 归并
+	sort.Strings(familyKeys)
+	dstTags := []model.Tag{}
+	for _, key := range familyKeys {
+		for _, tag := range tagsMap[key] {
+			dstTags = append(dstTags, tag)
+		}
+	}
+	return dstTags
 }

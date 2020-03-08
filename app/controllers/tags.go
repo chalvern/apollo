@@ -14,8 +14,8 @@ import (
 func TagsListHandler(c *gin.Context) {
 	c.Set(PageTitle, "标签列表")
 
-	page := service.QueryPage(c)
-	tags, allPage, err := service.TagsQueryWithContext(c)
+	// 当前默认 tag 最多不超过 1000 个
+	tags, _, err := service.TagsQuery(1, 1000)
 	if err != nil {
 		sugar.Errorf("TagsListHandler-获取 Shares 出错:%s", err.Error())
 		html(c, http.StatusOK, "notify/error.tpl", gin.H{
@@ -24,10 +24,10 @@ func TagsListHandler(c *gin.Context) {
 		return
 	}
 
+	tags = service.TagClassifyA(tags)
+
 	html(c, http.StatusOK, "tags/list.tpl", gin.H{
-		"Tags":        tags,
-		"CurrentPage": page,
-		"TotalPage":   allPage,
+		"Tags": tags,
 	})
 }
 
