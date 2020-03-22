@@ -27,7 +27,7 @@ func CommentsQueryWithContext(c *gin.Context, preloadUser bool, args ...interfac
 	argArray[0] = strings.Join(argS, "AND")
 
 	offset := (page - 1) * pageSize
-	comments, total, err := commentModel.QueryBatch(offset, pageSize, preloadUser, args...)
+	comments, total, err := commentModel.QueryBatch(offset, pageSize, preloadUser, argArray...)
 	allPage = total/pageSize + 1
 	return
 }

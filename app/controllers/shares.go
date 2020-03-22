@@ -35,7 +35,11 @@ func ShareDetailGet(c *gin.Context) {
 	}
 
 	page := service.QueryPage(c)
-	comments, allPage, err := service.CommentsQueryWithContext(c, true)
+	argS, argArray := argsInit()
+	argS = append(argS, "share_id=?")
+	argArray = append(argArray, share.ID)
+	argArray[0] = argS
+	comments, allPage, err := service.CommentsQueryWithContext(c, true, argArray...)
 	if err != nil {
 		sugar.Errorf("ShareDetailGet 获取用户评论出错：%s", err.Error())
 	}

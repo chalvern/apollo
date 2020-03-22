@@ -19,7 +19,7 @@ type Comment struct {
 // QueryBatch 检索一组
 func (c *Comment) QueryBatch(offset, pageSize int, userPreload bool, args ...interface{}) (comments []Comment, total int, err error) {
 	db := dbArgs(mydb, args...)
-	err = db.Model(Share{}).Count(&total).Error
+	err = db.Model(Comment{}).Count(&total).Error
 	if err != nil {
 		return
 	}
@@ -28,7 +28,7 @@ func (c *Comment) QueryBatch(offset, pageSize int, userPreload bool, args ...int
 			return db.Select("id,nickname")
 		})
 	}
-	err = db.Offset(offset).
+	err = db.Model(Comment{}).Offset(offset).
 		Limit(pageSize).Order("id asc").
 		Find(&comments).Error
 	return
