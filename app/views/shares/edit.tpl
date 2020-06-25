@@ -8,19 +8,20 @@
       <div class="panel-body">
         <form action="{{link `share_edit_get` `id` .Share.ID}}" id="signin-form" method="post">
           <div class="form-group">
+            <em style="color: red;">* </em>
+            <label for="title">标题</label> · 
+            <a href="#" onclick="onFresh(); return false;">刷新</a>
+            <textarea id="title" name="title" class="form-control" rows="1" 
+              placeholder="分享标题(添加url后刷新可以获取对应页面的标题)">{{.Share.Title}}</textarea>
+          </div>
+          <div class="form-group">
             <em style="color: red;">* </em><label for="url">分享的 url 地址</label>
-            <input type="text" id="url" name="url" class="form-control" onchange="analysisURL(this.value)"
+            <input type="text" id="url" name="url" class="form-control"
                 placeholder="url地址,带http(s)，例如 https://jingwei.link" value="{{.Share.URL}}"></input>
           </div>
           <div class="form-group">
-            <em style="color: red;">* </em>
-            <label for="title">分享标题</label> · 
-            <a href="#" onclick="onFresh(); return false;">刷新</a>
-            <textarea id="title" name="title" class="form-control" rows="1" placeholder="分享标题">{{.Share.Title}}</textarea>
-          </div>
-          <div class="form-group">
-            <em style="color: red;">* </em><label for="review">简单评论（支持markdown）</label>
-            <textarea id="review" name="review" class="form-control" rows="3"
+            <em style="color: red;">* </em><label for="review">内容（支持markdown）</label>
+            <textarea id="review" name="review" class="form-control" rows="30"
                 placeholder="陈述了什么事实？说明了什么问题？为什么推荐？">{{.Share.Review}}</textarea>
           </div>
           <div class="form-group">
