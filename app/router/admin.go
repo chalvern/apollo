@@ -15,4 +15,7 @@ func adminRouterInit() {
 		i.UserPriorityMiddleware(model.UserPrioritySuper), admin.AccountsEditGet)
 	post("admin_account_edit_post", "/admin/account/edit",
 		i.UserPriorityMiddleware(model.UserPrioritySuper), admin.AccountsEditPost)
+
+	get("admin_comments_list", "/admin/comments/list",
+		i.UserPriorityMiddleware(model.UserPrioritySuper), admin.CommentsList)
 }

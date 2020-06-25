@@ -13,7 +13,8 @@ var (
 )
 
 // CommentsQueryWithContext 根据 url query 参数检索
-func CommentsQueryWithContext(c *gin.Context, preloadUser bool, args ...interface{}) (comments []model.Comment, allPage int, err error) {
+func CommentsQueryWithContext(c *gin.Context, preloadUser bool, order string,
+	args ...interface{}) (comments []model.Comment, allPage int, err error) {
 
 	page := queryPage(c)
 	pageSize := queryPageSize(c)
@@ -27,7 +28,7 @@ func CommentsQueryWithContext(c *gin.Context, preloadUser bool, args ...interfac
 	argArray[0] = strings.Join(argS, "AND")
 
 	offset := (page - 1) * pageSize
-	comments, total, err := commentModel.QueryBatch(offset, pageSize, preloadUser, argArray...)
+	comments, total, err := commentModel.QueryBatch(offset, pageSize, preloadUser, order, argArray...)
 	allPage = total/pageSize + 1
 	return
 }

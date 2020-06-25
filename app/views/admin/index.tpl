@@ -4,6 +4,7 @@
       <div class="panel-body paginate-bot">
         <ul>
           <li><a href="{{link `admin_account_list`}}">用户列表</a></li>
+          <li><a href="{{link `admin_comments_list`}}">评论列表</a></li>
         </ul>
       </div>
       </div>
