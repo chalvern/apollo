@@ -8,10 +8,15 @@
 	</div>
 	<div class="media-body">
 		<div class="title">
-			<a href="{{link `share_detail` `id` .ID}}">《{{.Title}}》</a>{{if .URL}}· 
-			<span style="font-size: 14px">
-				(<a href="{{link `share_direct_jump` `id` .ID}}" target="_blank">原文</a>)
-			</span>
+			<a href="{{link `share_detail` `id` .ID}}">《{{.Title}}》</a>· 
+			{{if .URL}}
+				<span style="font-size: 14px">
+					(<a href="{{link `share_direct_jump` `id` .ID}}" target="_blank">原文</a>)
+				</span>
+			{{else}}
+				<span style="font-size: 14px">
+					(<a href="{{link `share_detail` `id` .ID}}" style="color: #3c763d;">原创</a>)
+				</span>
 			{{end}}
 		</div>
 		<div class="reviews">
