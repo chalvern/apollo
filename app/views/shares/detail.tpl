@@ -8,9 +8,11 @@
 		<div class="panel-body paginate-bot detail">
 			<div class="title">
 				《{{ .Share.Title }}》
-				<span style="font-size: 14px">
-					(<a href="{{link `share_direct_jump` `id` .Share.ID}}" target="_blank">原文</a>)
-				</span>
+				{{if .Share.URL}}
+					<span style="font-size: 14px">
+						(<a href="{{link `share_direct_jump` `id` .Share.ID}}" target="_blank">原文</a>)
+					</span>
+				{{end}}
 			</div>
 			<div class="detail-status">
 				经 <a href="{{link `user_detail` `uid` .Share.User.ID}}">{{.Share.User.Nickname}}</a> 推荐 · 

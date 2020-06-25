@@ -15,7 +15,7 @@
               placeholder="分享标题(添加url后刷新可以获取对应页面的标题)">{{.Share.Title}}</textarea>
           </div>
           <div class="form-group">
-            <em style="color: red;">* </em><label for="url">分享的 url 地址</label>
+            <label for="url">分享的 url 地址</label>
             <input type="text" id="url" name="url" class="form-control"
                 placeholder="url地址,带http(s)，例如 https://jingwei.link" value="{{.Share.URL}}"></input>
           </div>
