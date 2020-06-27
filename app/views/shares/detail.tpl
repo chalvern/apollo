@@ -28,13 +28,13 @@
 			</div>
 		</div>
 	</div>
-	{{if .Checklist}}
+	{{if .Checklists}}
 		<div class="panel panel-default">
 			<div class="panel-body paginate-bot">
 				<ul class="detail-checklist">
-					<li>
-						<input type="checkbox" class=""> 首先开始
-					</li>
+					{{range .Checklists}}
+						<li><input type="checkbox" class=""> {{.Title}} </li>
+					{{end}}
 				</ul>
 			</div>
 		</div>

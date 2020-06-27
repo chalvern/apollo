@@ -25,6 +25,7 @@ type Share struct {
 	ClickCount   int    `gorm:"default:0"`         // 点击数量(浏览数量)
 	StarCount    int    `gorm:"default:0"`         // 赞的数量
 	CommentCount int    `gorm:"default:0"`         // 评论的数量
+	ChecklistID  uint   `gorm:"default:0"`         // 检查项头
 }
 
 // QueryBatch 检索一组
