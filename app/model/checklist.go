@@ -30,6 +30,13 @@ func (c *Checklist) Create() error {
 	return mydb.Save(c).Error
 }
 
+// QueryByID 根据 id 检索
+func (c *Checklist) QueryByID(id interface{}) (checklist *Checklist, err error) {
+	checklist = &Checklist{}
+	err = mydb.Where("id = ?", id).First(checklist).Error
+	return
+}
+
 // Updates 更新
 func (c *Checklist) Updates(values interface{}) error {
 	if c.ID == 0 {

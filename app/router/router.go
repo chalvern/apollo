@@ -57,4 +57,7 @@ func routerInit() {
 	// share comments
 	post("comment_new_post", "/share/comment/new", i.UserMustExistMiddleware(), controllers.CommentNewPost)
 
+	// checklist
+	post("checklist_new_post", "/share/checklist/new", i.UserMustExistMiddleware(), controllers.ChecklistNewPost)
+
 }

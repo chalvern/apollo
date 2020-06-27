@@ -31,14 +31,49 @@
 	{{if .Checklists}}
 		<div class="panel panel-default">
 			<div class="panel-body paginate-bot">
-				<ul class="detail-checklist">
+				<div class="detail-checklist">
 					{{range .Checklists}}
-						<li><input type="checkbox" class=""> {{.Title}} </li>
+						<div class="dropdown">
+							<input type="checkbox" class=""> {{.Title}} 
+							<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+								<span class="caret"></span>
+							</a>
+							<span class="dropdown-arrow"></span>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:insertNewChecklist({{.ID}});">插入检查项</a></li>
+							</ul>
+						</div>
 					{{end}}
-				</ul>
+				</div>
 			</div>
 		</div>
+	{{else}}
+		<div style="text-align: center;margin-bottom: 20px;">
+			<a href="javascript:insertNewChecklist(0);">添加检查项</a>
+		</div>
 	{{end}}
+	{{if account_normal_authority .Account}}
+		<div id="checklist-form" class="panel panel-default" style="display:none">
+			<div class="panel-body">
+				<form action="{{link `checklist_new_post`}}" method="post">
+					<input type="hidden" value="{{.Share.ID}}" name="share_id">
+					<input type="hidden" id="pre_id" value="0" name="pre_id">
+					<div class="form-group">
+						<em style="color: red;">* </em>
+						<label for="title">添加检查项</label>
+						<textarea id="title" name="title" class="form-control" rows="3" placeholder="检查项(不多于200字)"></textarea>
+					</div>
+					<button type="submit" class="btn btn-default">添加</button>
+					<button type="submit" class="btn btn-default" onclick="checklistFormCancel();return false;">关闭</button>
+				</form>
+			</div>
+		</div>
+	{{else}}
+		<div id="checklist-form">
+			<a href="{{link `signin`}}">未登陆</a>或尚未认证授权
+		</div>
+	{{end}}
+
 	<div class="panel panel-default">
 		<div class="panel-body paginate-bot">
 			{{if .Comments}}
@@ -78,3 +113,15 @@
 {{if not .Comments}}
 <div class="placeholder-body"></div>
 {{end}}
+
+
+<script language=javascript>
+function checklistFormCancel() {
+    document.getElementById("checklist-form").style.display="none";
+}
+
+function insertNewChecklist(checklist_id) {
+	document.getElementById("pre_id").value = checklist_id;
+	document.getElementById("checklist-form").style.display="";
+}
+</script>

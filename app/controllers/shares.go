@@ -45,7 +45,7 @@ func ShareDetailGet(c *gin.Context) {
 		sugar.Errorf("ShareDetailGet 获取用户评论出错：%s", err.Error())
 	}
 	// checklist
-	checklists, err := service.ChecklistsWithOrderQuery(share.ID)
+	checklists, err := service.ChecklistsWithOrderQuery(share)
 
 	htmlOfOk(c, "shares/detail.tpl", gin.H{
 		"Share":       &share,
