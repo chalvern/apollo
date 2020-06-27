@@ -12,7 +12,7 @@ import (
 
 // ChecklistNewPost 创建一个新的检查项
 func ChecklistNewPost(c *gin.Context) {
-	c.Set(PageTitle, "新评论")
+	c.Set(PageTitle, "新检查项")
 	form := struct {
 		ShareID uint   `form:"share_id" binding:"required"`
 		PreID   uint   `form:"pre_id"`
@@ -59,4 +59,37 @@ func ChecklistNewPost(c *gin.Context) {
 		"RedirectName": share.Title,
 	})
 
+}
+
+// ChecklistUpdate 更新检查项
+func ChecklistUpdate(c *gin.Context) {
+	c.Set(PageTitle, "更新检查项")
+	form := struct {
+		ShareID     uint   `form:"share_id" binding:"required"`
+		ChecklistID uint   `form:"checklist_id" binding:"required"`
+		Title       string `form:"title" binding:"required,lengte=1,lenlte=200"`
+	}{}
+	if errs := c.ShouldBind(&form); errs != nil {
+		sugar.Warnf("ChecklistUpdate Bind form Error: %s", errs.Error())
+		html(c, http.StatusOK, "notify/error.tpl", gin.H{
+			"FlashError": "请检查是否填写正确",
+		})
+		return
+	}
+	user := c.MustGet("user").(*model.User)
+	err := service.ChecklistUpdate(form.ChecklistID, form.Title, user)
+	if err != nil {
+		sugar.Errorf("ChecklistUpdate Update Error: %s", err.Error())
+		htmlOfOk(c, "notify/error.tpl", gin.H{
+			"FlashError": "更新出现了问题，请检查提交内容后稍后重试",
+		})
+		return
+	}
+
+	htmlOfOk(c, "notify/success.tpl", gin.H{
+		"Info":         "发布成功!",
+		"Timeout":      1,
+		"RedirectURL":  "/share/detail?id=" + strconv.Itoa(int(form.ShareID)),
+		"RedirectName": "原帖子",
+	})
 }

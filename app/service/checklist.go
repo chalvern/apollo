@@ -105,3 +105,19 @@ func ChecklistCreate(checklist *model.Checklist, share *model.Share) error {
 	}
 	return mydb.Commit().Error
 }
+
+// ChecklistUpdate 更新检查项
+func ChecklistUpdate(checklistID uint, title string, user *model.User) error {
+	checklist, err := checklistModel.QueryByID(checklistID)
+	if err != nil {
+		return fmt.Errorf("ChecklistUpdate 检索 checklist 错误: %s", err.Error())
+	}
+	share, err := ShareQueryByID(checklist.ShareID)
+	if err != nil {
+		return fmt.Errorf("ChecklistUpdate 检索 share 错误: %s", err.Error())
+	}
+	if user.ID != checklist.UserID || user.ID != share.UserID {
+		return fmt.Errorf("ChecklistUpdate 更新检查项权限错误: %d", user.ID)
+	}
+	return checklist.Update("title", title)
+}

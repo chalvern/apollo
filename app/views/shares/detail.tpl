@@ -41,6 +41,7 @@
 							<span class="dropdown-arrow"></span>
 							<ul class="dropdown-menu">
 								<li><a href="javascript:insertNewChecklist({{.ID}});">插入检查项</a></li>
+								<li><a href='javascript:updateChecklist({{.ID}}, "{{.Title}}")'>更新</a></li>
 							</ul>
 						</div>
 					{{end}}
@@ -53,7 +54,7 @@
 		</div>
 	{{end}}
 	{{if account_normal_authority .Account}}
-		<div id="checklist-form" class="panel panel-default" style="display:none">
+		<div id="checklist-form-new" class="panel panel-default" style="display:none">
 			<div class="panel-body">
 				<form action="{{link `checklist_new_post`}}" method="post">
 					<input type="hidden" value="{{.Share.ID}}" name="share_id">
@@ -61,10 +62,25 @@
 					<div class="form-group">
 						<em style="color: red;">* </em>
 						<label for="title">添加检查项</label>
-						<textarea id="title" name="title" class="form-control" rows="3" placeholder="检查项(不多于200字)"></textarea>
+						<textarea id="checklist-new-title" name="title" class="form-control" rows="3" placeholder="检查项(不多于200字)"></textarea>
 					</div>
 					<button type="submit" class="btn btn-default">添加</button>
 					<button type="submit" class="btn btn-default" onclick="checklistFormCancel();return false;">关闭</button>
+				</form>
+			</div>
+		</div>
+		<div id="checklist-form-update" class="panel panel-default" style="display:none">
+			<div class="panel-body">
+				<form action="{{link `checklist_update_post`}}" method="post">
+					<input type="hidden" value="{{.Share.ID}}" name="share_id">
+					<input type="hidden" id="checklist_id" value="0" name="checklist_id">
+					<div class="form-group">
+						<em style="color: red;">* </em>
+						<label for="title">更新检查项</label>
+						<textarea id="checklist-update-title" name="title" class="form-control" rows="3" placeholder="检查项(不多于200字)"></textarea>
+					</div>
+					<button type="submit" class="btn btn-default">更新</button>
+					<button type="submit" class="btn btn-default" onclick="checklistUpdateFormCancel();return false;">关闭</button>
 				</form>
 			</div>
 		</div>
@@ -117,11 +133,21 @@
 
 <script language=javascript>
 function checklistFormCancel() {
-    document.getElementById("checklist-form").style.display="none";
+    document.getElementById("checklist-form-new").style.display="none";
+}
+
+function checklistUpdateFormCancel() {
+    document.getElementById("checklist-form-update").style.display="none";
 }
 
 function insertNewChecklist(checklist_id) {
 	document.getElementById("pre_id").value = checklist_id;
-	document.getElementById("checklist-form").style.display="";
+	document.getElementById("checklist-form-new").style.display="";
+}
+
+function updateChecklist(checklist_id, title) {
+	document.getElementById("checklist_id").value = checklist_id;
+	document.getElementById("checklist-update-title").value = title;
+	document.getElementById("checklist-form-update").style.display="";
 }
 </script>

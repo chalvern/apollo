@@ -59,5 +59,6 @@ func routerInit() {
 
 	// checklist
 	post("checklist_new_post", "/share/checklist/new", i.UserMustExistMiddleware(), controllers.ChecklistNewPost)
+	post("checklist_update_post", "/share/checklist/update", i.UserMustExistMiddleware(), controllers.ChecklistUpdate)
 
 }
