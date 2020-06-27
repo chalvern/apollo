@@ -45,6 +45,7 @@ func ShareDetailGet(c *gin.Context) {
 	}
 	htmlOfOk(c, "shares/detail.tpl", gin.H{
 		"Share":       &share,
+		"Checklist":   1,
 		"CurrentPage": page,
 		"TotalPage":   allPage,
 		"Comments":    comments,

@@ -28,6 +28,17 @@
 			</div>
 		</div>
 	</div>
+	{{if .Checklist}}
+		<div class="panel panel-default">
+			<div class="panel-body paginate-bot">
+				<ul class="detail-checklist">
+					<li>
+						<input type="checkbox" class=""> 首先开始
+					</li>
+				</ul>
+			</div>
+		</div>
+	{{end}}
 	<div class="panel panel-default">
 		<div class="panel-body paginate-bot">
 			{{if .Comments}}

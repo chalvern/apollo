@@ -116,5 +116,10 @@ body {
   margin: 0;
 }
 
+/* share detail checklist */
+.detail-checklist {
+  list-style: none;
+  padding-left: 10px;
+}
 
 
